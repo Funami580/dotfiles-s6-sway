@@ -1,0 +1,15 @@
+~/.bash_profile
+~/.config/sway/
+~/.config/waybar/
+~/.config/wezterm/
+~/.config/mako/
+~/.config/swappy/
+~/.config/fastfetch/presets/
+~/.fonts/fa-*
+/etc/environment
+/etc/cron.monthly/
+/etc/s6/config/connman.conf
+/etc/connman/main.conf
+/usr/share/applications/discord.desktop
+/usr/share/backgrounds/sway/night.jpg
+/usr/share/backgrounds/sway/plasma_5_11.png

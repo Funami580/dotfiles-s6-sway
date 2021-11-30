@@ -1,0 +1,9 @@
+#
+# This file is parsed by pam_env module
+#
+# Syntax: simple "KEY=VAL" pairs on separate lines
+#
+MOZ_ENABLE_WAYLAND=1
+MOZ_WEBRENDER=1
+XDG_CURRENT_DESKTOP=sway
+QT_QPA_PLATFORM=wayland
