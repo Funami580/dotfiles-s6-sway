@@ -214,12 +214,12 @@ for_window [app_id="org.kde.dolphin" title="Kopiervorgang.*"] floating toggle
 input * xkb_layout "de"
 input * xkb_numlock enable
 
-exec swaymsg workspace_layout tabbed
+exec swaymsg layout tabbed
 exec gammastep -O 4500
 exec /usr/bin/pipewire
 exec /usr/bin/pipewire-pulse
 exec /usr/bin/pipewire-media-session
-exec wl-paste -t text --watch cliphist store
+exec rm ~/.cache/cliphist/db; wl-paste -t text --watch cliphist store
 exec udiskie --no-notify
 exec mako
 
@@ -229,14 +229,17 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym $mod+m exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym $mod+Shift+m exec ~/.config/sway/mute_window.sh
 
+bindsym Print exec grim -g "$(slurp)" - | tee ~/Bilder/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S.png') | wl-copy --type image/png
+bindsym Shift+Print exec grim - | tee ~/Bilder/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S.png') | wl-copy --type image/png
+bindsym Control+Print exec grim -g "$(slurp)" - | swappy -f -
+bindsym Control+Shift+Print exec grim - | swappy -f -
+
 bindsym $mod+Control+Shift+q exec swaymsg -t get_tree | jq '.. | select(.type?) | select(.focused==true).pid' | xargs kill -9
-bindsym Print exec grim -g "$(slurp)" ~/Bilder/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S.png')
-# wl-copy --type image/png
-bindsym Shift+Print exec grim -g "$(slurp)" - | swappy -f -
 bindsym $mod+Mod1+f exec librewolf
-bindsym $mod+Mod1+Control+f exec librewolf --private-window
+bindsym $mod+Mod1+Control+f exec librewolf --private-window https://duckduckgo.com/
 bindsym $mod+Mod1+c exec chromium
 bindsym $mod+Mod1+Control+c exec chromium --incognito
+bindsym $mod+Mod1+h exec cliphist list | dmenu | cliphist decode | wl-copy
 bindsym $mod+Mod1+t exec thunderbird
 bindsym $mod+Mod1+d exec dolphin
 bindsym $mod+Mod1+k exec kate

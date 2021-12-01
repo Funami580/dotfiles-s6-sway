@@ -22,6 +22,7 @@ return {
     {key="f", mods="CTRL|SHIFT", action=wezterm.action{Search={CaseInSensitiveString=""}}},
   },
   selection_word_boundary = " \t\n{}[]()\"'`.,;:",
+  exit_behavior = "Close",
   hide_tab_bar_if_only_one_tab = true,
   enable_scroll_bar = true,
   scrollback_lines = 3000,
