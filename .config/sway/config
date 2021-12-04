@@ -221,7 +221,7 @@ exec gammastep -O 4500
 exec /usr/bin/pipewire
 exec /usr/bin/pipewire-pulse
 exec /usr/bin/pipewire-media-session
-exec rm ~/.cache/cliphist/db; wl-paste -t text --watch cliphist store
+exec bash -c "rm ~/.cache/cliphist/db; wl-paste -t text --watch cliphist store"
 exec udiskie --no-notify
 exec mako
 
