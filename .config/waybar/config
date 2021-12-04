@@ -26,10 +26,13 @@
 		"pulseaudio#1",
 		"custom/left-arrow-light",
 		"custom/left-arrow-dark",
-		"memory",
+		"custom/network",
 		"custom/left-arrow-light",
 		"custom/left-arrow-dark",
 		"cpu",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"memory",
 		"custom/left-arrow-light",
 		"custom/left-arrow-dark",
 		"_battery",
@@ -60,8 +63,15 @@
 		"format": "",
 		"tooltip": false
 	},
+	"custom/network": {
+		"exec": "connmanctl state | grep -qE 'State = (online|ready)'; if [[ $? = 0 ]]; then mullvad status | grep -q Connected; if [[ $? = 0 ]]; then echo -e '\\xef\\x80\\xa3 eth0'; else echo -e '\\xef\\x9e\\x96 eth0'; fi; else echo -e 'eth0'; fi",
+		"exec-if": "exit 0",
+		"interval": 1,
+		"on-click-right": "connmanctl state | grep -q 'OfflineMode = False'; [[ $? = 0 ]] && connmanctl enable offline || connmanctl disable offline",
+		"on-click-middle": "mullvad status | grep -q Disconnected; if [[ $? = 0 ]]; then mullvad connect; else mullvad disconnect; fi",
+		"tooltip": false
+	},
 	"custom/night-color": {
-		"format": "{}",
 		"exec": "[[ -n $(pidof gammastep) ]] && echo -e '\\xef\\x86\\x86' || echo -e '\\xef\\x86\\x85'",
 		"exec-if": "exit 0",
 		"exec-on-event": false,

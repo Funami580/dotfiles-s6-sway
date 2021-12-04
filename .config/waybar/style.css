@@ -28,6 +28,7 @@ window#waybar {
 #battery,
 #disk,
 #tray,
+#custom-network,
 #custom-night-color,
 #custom-shutdown {
 	background: #1a1a1a;
@@ -59,7 +60,8 @@ window#waybar {
 #cpu {
 	color: #6c71c4;
 }
-#battery {
+#battery,
+#custom-network {
 	color: #859900;
 }
 #disk {
@@ -72,6 +74,7 @@ window#waybar {
 #cpu,
 #battery,
 #disk,
+#custom-network,
 #custom-night-color,
 #custom-shutdown {
 	padding: 0 8px;
