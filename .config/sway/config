@@ -245,4 +245,5 @@ bindsym $mod+Mod1+h exec cliphist list | dmenu | cliphist decode | wl-copy
 bindsym $mod+Mod1+t exec thunderbird
 bindsym $mod+Mod1+d exec dolphin
 bindsym $mod+Mod1+k exec kate
+bindsym $mod+Mod1+v exec mpv "$(wl-paste -n)"
 bindsym $mod+Mod1+Return exec $term start python3
