@@ -21,6 +21,12 @@ return {
     {key="End", mods="", action=wezterm.action{ScrollByLine=15000}},
     {key="f", mods="CTRL|SHIFT", action=wezterm.action{Search={CaseInSensitiveString=""}}},
   },
+  window_padding = {
+    left = 0,
+    right = 0,
+    top = 0,
+    bottom = 0,
+  },
   selection_word_boundary = " \t\n{}[]()\"'`.,;:",
   exit_behavior = "Close",
   hide_tab_bar_if_only_one_tab = true,
