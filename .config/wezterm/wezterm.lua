@@ -27,7 +27,7 @@ return {
     top = 0,
     bottom = 0,
   },
-  selection_word_boundary = " \t\n{}[]()\"'`.,;:",
+  selection_word_boundary = " \t\n{}[]()\"'`.,;:!?",
   exit_behavior = "Close",
   hide_tab_bar_if_only_one_tab = true,
   enable_scroll_bar = true,
