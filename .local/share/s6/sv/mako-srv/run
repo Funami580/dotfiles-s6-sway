@@ -3,4 +3,4 @@ importas -iu ~ HOME
 envfile ${~}/.local/share/s6/config/mako.conf
 importas -sCuD "" OPTS OPTS
 fdmove -c 2 1
-exec mako ${OPTS}
+exec mako --config ${~}/.config/mako/config ${OPTS}
