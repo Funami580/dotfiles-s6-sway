@@ -199,7 +199,6 @@ exec swaymsg layout tabbed
 exec ~/.config/sway/start_user_services.sh
 exec ~/.config/sway/mute_microphone.sh
 exec ~/.config/waybar/night-mode.sh
-exec bash -c "rm ~/.cache/cliphist/db; wl-paste -t text --watch cliphist store"
 
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%

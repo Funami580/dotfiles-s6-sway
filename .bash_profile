@@ -20,6 +20,9 @@ if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
   # https://github.com/swaywm/sway/wiki#issues-with-jetbrains-ide-popupsmenus-losing-focus
   export STUDIO_JDK=/usr/lib/jvm/java-11-openjdk/
 
+  # cliphist: remove old history
+  rm -f ~/.cache/cliphist/db
+
   # Start sway
   export XDG_CURRENT_DESKTOP=sway
   mkdir -p ~/.var/log/sway
