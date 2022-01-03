@@ -32,7 +32,7 @@
 		"cpu",
 		"custom/left-arrow-light",
 		"custom/left-arrow-dark",
-		"memory",
+		"custom/memory",
 		"custom/left-arrow-light",
 		"custom/left-arrow-dark",
 		"_battery",
@@ -70,6 +70,14 @@
 		"on-click-right": "connmanctl state | grep -q 'OfflineMode = False'; [[ $? = 0 ]] && connmanctl enable offline || connmanctl disable offline",
 		"on-click-middle": "mullvad status | grep -q Disconnected; if [[ $? = 0 ]]; then mullvad connect; else mullvad disconnect; fi",
 		"tooltip": false
+	},
+	"custom/memory": {
+		"interval": 5,
+		"format": "Mem {}%",
+		"return-type": "json",
+		"exec": "~/.config/waybar/mem.sh",
+		"exec-if": "exit 0",
+		"tooltip": true
 	},
 	"custom/night-color": {
 		"exec": "[[ -n $(pidof gammastep) ]] && echo -e '\\xef\\x86\\x86' || echo -e '\\xef\\x86\\x85'",
