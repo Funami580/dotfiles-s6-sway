@@ -34,4 +34,5 @@ return {
   enable_scroll_bar = true,
   scrollback_lines = 10000,
   check_for_updates = false,
+  enable_wayland = true,
 }
