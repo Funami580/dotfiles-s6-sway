@@ -76,7 +76,7 @@
 		"exec-if": "exit 0",
 		"exec-on-event": false,
 		"interval": "once",
-		"on-click-right": "bash -c '[[ -n $(pidof gammastep) ]] && killall -9 gammastep || gammastep -O 4500 &'; pkill -SIGRTMIN+8 waybar",
+		"on-click-right": "~/.config/waybar/night-mode.sh",
 		"signal": 8
 	},
 	"custom/shutdown": {
