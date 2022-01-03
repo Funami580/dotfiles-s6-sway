@@ -6,7 +6,7 @@
 ~/.config/swappy/
 ~/.config/fastfetch/presets/
 ~/.fonts/fa-*
-/etc/environment
+~/.local/share/s6/
 /etc/cron.monthly/
 /etc/s6/config/connman.conf
 /etc/connman/main.conf

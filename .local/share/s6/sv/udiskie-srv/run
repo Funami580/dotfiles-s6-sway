@@ -1,0 +1,6 @@
+#!/bin/execlineb -P
+importas -iu ~ HOME
+envfile ${~}/.local/share/s6/config/udiskie.conf
+importas -sCuD "" OPTS OPTS
+fdmove -c 2 1
+exec udiskie ${OPTS}

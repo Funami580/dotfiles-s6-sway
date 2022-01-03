@@ -218,12 +218,9 @@ input * xkb_numlock enable
 
 exec swaymsg layout tabbed
 exec gammastep -O 4500
-exec /usr/bin/pipewire
-exec /usr/bin/pipewire-pulse
-exec /usr/bin/pipewire-media-session
+exec ~/.config/sway/start_user_services.sh
+exec ~/.config/sway/mute_microphone.sh
 exec bash -c "rm ~/.cache/cliphist/db; wl-paste -t text --watch cliphist store"
-exec udiskie --no-notify
-exec mako
 
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
@@ -236,7 +233,9 @@ bindsym Shift+Print exec grim - | tee ~/Bilder/Screenshots/$(date +'%Y-%m-%d_%H-
 bindsym Control+Print exec grim -g "$(slurp)" - | swappy -f -
 bindsym Control+Shift+Print exec grim - | swappy -f -
 
+bindsym $mod+t sticky toggle
 bindsym $mod+Control+Shift+q exec swaymsg -t get_tree | jq '.. | select(.type?) | select(.focused==true).pid' | xargs kill -9
+
 bindsym $mod+Mod1+f exec librewolf
 bindsym $mod+Mod1+Control+f exec librewolf --private-window https://duckduckgo.com/
 bindsym $mod+Mod1+c exec chromium
@@ -247,3 +246,4 @@ bindsym $mod+Mod1+d exec dolphin
 bindsym $mod+Mod1+k exec kate
 bindsym $mod+Mod1+v exec mpv "$(wl-paste -n)"
 bindsym $mod+Mod1+Return exec $term start python3
+bindsym $mod+Control+Return exec $term start fend
