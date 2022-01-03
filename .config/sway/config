@@ -217,9 +217,9 @@ input * xkb_layout "de"
 input * xkb_numlock enable
 
 exec swaymsg layout tabbed
-exec gammastep -O 4500
 exec ~/.config/sway/start_user_services.sh
 exec ~/.config/sway/mute_microphone.sh
+exec ~/.config/waybar/night-mode.sh
 exec bash -c "rm ~/.cache/cliphist/db; wl-paste -t text --watch cliphist store"
 
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
