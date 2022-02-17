@@ -5,6 +5,7 @@
 ~/.config/mako/
 ~/.config/swappy/
 ~/.config/fastfetch/presets/
+~/.config/fontconfig/
 ~/.fonts/fa-*
 ~/.local/share/s6/
 /etc/cron.monthly/
