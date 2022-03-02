@@ -64,7 +64,7 @@
 		"tooltip": false
 	},
 	"custom/network": {
-		"exec": "connmanctl state | grep -qE 'State = (online|ready)'; if [[ $? = 0 ]]; then mullvad status | grep -q Connected; if [[ $? = 0 ]]; then echo -e '\\xef\\x80\\xa3 eth0'; else echo -e '\\xef\\x9e\\x96 eth0'; fi; else echo -e 'eth0'; fi",
+		"exec": "if connmanctl state | grep -qE 'State = (online|ready)'; then if mullvad status | grep -q Connected; then echo -e '\\xef\\x80\\xa3 eth0'; elif mullvad status | grep -q Connecting; then echo -e '* eth0'; elif mullvad status | grep -q Blocked; then echo -e '\\xef\\x82\\x9c eth0'; else echo -e '\\xef\\x9e\\x96 eth0'; fi; else echo -e 'eth0'; fi",
 		"exec-if": "exit 0",
 		"interval": 1,
 		"on-click-right": "connmanctl state | grep -q 'OfflineMode = False'; [[ $? = 0 ]] && connmanctl enable offline || connmanctl disable offline",
