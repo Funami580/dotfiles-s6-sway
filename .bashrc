@@ -91,8 +91,8 @@ alias pacrmorphans='sudo pacman -Rns $(pacman -Qdtq)'
 alias pacrmcache='du -sh /var/cache/pacman/pkg/ && paccache -d | tail -n -1 && read -p "Continue to remove cached packages?" && sudo paccache -r | tail -n -1'
 alias allinstalled='pacman -Qqe'
 alias aurinstalled='pacman -Qqem'
-alias pacinstalled='comm -23 <(allinstalled) <(aurinstalled)'
-alias chaoticinstalled='paclist chaotic-aur | awk "{ print \$1 }" | xargs -I% bash -c "pacman -Qqe % > /dev/null; [[ \$? = 0 ]] && echo %"'
+alias pacinstalled='comm -23 <(allinstalled | sort) <(aurinstalled | sort)'
+alias chaoticinstalled='paclist chaotic-aur | awk "{ print \$1 }" | xargs -I% bash -c "pacman -Qqe % > /dev/null; [[ \$? = 0 ]] && echo % || true"'
 alias checkrebuildc='checkrebuild -i chaotic-aur'
 
 aurpkg() {
