@@ -1,0 +1,27 @@
+{
+  "animation": false,
+  "autoCollapseExpandSubtreeOnAttach": false,
+  "autoCollapseExpandSubtreeOnSelect": false,
+  "chunkedUserStyleRules0": "LyogU2hvdyB0aXRsZSBvZiB1bnJlYWQgdGFicyB3aXRoIHJlZCBhbmQgaXRhbGljIGZvbnQgKi8KOnJvb3Quc2lkZWJhciB0YWItaXRlbS51bnJlYWQgLmxhYmVsLWNvbnRlbnQgewogIGNvbG9yOiByZWQgIWltcG9ydGFudDsKICBmb250LXN0eWxlOiBpdGFsaWMgIWltcG9ydGFudDsKfQoKLyogQWRkIHByaXZhdGUgYnJvd3NpbmcgaW5kaWNhdG9yIHBlciB0YWIgKi8KLyoKOnJvb3Quc2lkZWJhciB0YWItaXRlbS5wcml2YXRlLWJyb3dzaW5nIHRhYi1sYWJlbDpiZWZvcmUgewogIGNvbnRlbnQ6ICLwn5W2IjsKfQoqLw==",
+  "configsVersion": 25,
+  "notifiedFeaturesVersion": 9,
+  "optionsExpandedSections": [
+    "section-appearance",
+    "section-drag",
+    "section-treeBehavior",
+    "section-debug"
+  ],
+  "style": "photon",
+  "syncDevices": {
+    "device-1636752911400-46177": {
+      "id": "device-1636752911400-46177",
+      "name": "LibreWolf on Linux",
+      "icon": "device-desktop",
+      "timestamp": 1647976708500
+    }
+  },
+  "userStyleRules": "",
+  "userStyleRulesFieldHeight": "146.6666717529297px",
+  "warnOnCloseTabsByClosebox": false,
+  "workaroundForBug1548949DroppedTabs": ""
+}

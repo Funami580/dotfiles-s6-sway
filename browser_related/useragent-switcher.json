@@ -1,0 +1,26 @@
+{
+  "blacklist": [],
+  "cache": true,
+  "custom": {},
+  "exactMatch": false,
+  "faqs": true,
+  "last-update": 1638355625700,
+  "log": false,
+  "mode": "whitelist",
+  "parser": {},
+  "popup-os": "Android",
+  "protected": [
+    "google.com/recaptcha",
+    "gstatic.com/recaptcha",
+    "accounts.google.com",
+    "accounts.youtube.com",
+    "gitlab.com/users/sign_in"
+  ],
+  "siblings": {},
+  "ua": "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36",
+  "whitelist": [
+    "instagram.com"
+  ],
+  "json-guid": "fbd9f582-d395-477d-b736-79d45319dd1a",
+  "json-forced": false
+}

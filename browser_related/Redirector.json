@@ -1,0 +1,23 @@
+{
+    "createdBy": "Redirector v3.5.3",
+    "createdAt": "2022-03-22T21:15:39.100Z",
+    "redirects": [
+        {
+            "description": "bs.to redirect to Streamtape",
+            "exampleUrl": "https://bs.to/serie/Saki/1/1-Encounter/des",
+            "exampleResult": "https://bs.to/serie/Saki/1/1-Encounter/des/Streamtape",
+            "error": null,
+            "includePattern": "^https://bs.to/serie/([^/]+)/([^/]+)/([^/]+)/([^/]+)$",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://bs.to/serie/$1/$2/$3/$4/Streamtape",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        }
+    ]
+}
