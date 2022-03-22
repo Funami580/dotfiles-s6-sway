@@ -5,6 +5,8 @@ return {
   font = wezterm.font_with_fallback({
     "Hack",
     "Twemoji",
+    "Noto Sans Symbols",
+    "Noto Sans Symbols2",
   }),
   color_scheme = "F1r3w4tch",
   disable_default_key_bindings = true,
