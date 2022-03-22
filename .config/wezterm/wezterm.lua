@@ -28,11 +28,13 @@ return {
     bottom = 0,
   },
   selection_word_boundary = " \t\n{}[]()\"'`.,;:!?",
+  canonicalize_pasted_newlines = "LineFeed",
   audible_bell = "Disabled",
   exit_behavior = "Close",
   hide_tab_bar_if_only_one_tab = true,
   enable_scroll_bar = true,
   scrollback_lines = 10000,
+  animation_fps = 1,
   check_for_updates = false,
   enable_wayland = true,
 }
