@@ -167,7 +167,8 @@ s6-db-reload
 # TODO: add dbus-s6 to default bundle + check if udev started + elogind at boot + dmesg | grep zstd
 
 # Some s6 services you may want to install (optional)
-pacman -S cronie-s6 openssh-s6 iptables-s6 fail2ban-s6 cups-s6
+pacman -S syslogd-s6 cronie-s6 openssh-s6 iptables-s6 fail2ban-s6 cups-s6
+touch /etc/s6/adminsv/default/contents.d/syslogd
 touch /etc/s6/adminsv/default/contents.d/cronie
 touch /etc/s6/adminsv/default/contents.d/sshd
 touch /etc/s6/adminsv/default/contents.d/iptables
