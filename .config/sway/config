@@ -211,6 +211,7 @@ bindsym Shift+Print exec grim - | tee ~/Bilder/Screenshots/$(date +'%Y-%m-%d_%H-
 bindsym Control+Print exec grim -g "$(slurp)" - | swappy -f -
 bindsym Control+Shift+Print exec grim - | swappy -f -
 
+bindsym $mod+n split none
 bindsym $mod+t sticky toggle
 bindsym $mod+Control+Shift+q exec swaymsg -t get_tree | jq '.. | select(.type?) | select(.focused==true).pid' | xargs kill -9
 
