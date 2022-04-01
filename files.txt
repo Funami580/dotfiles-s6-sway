@@ -9,6 +9,7 @@
 ~/.fonts/fa-*
 ~/.local/share/s6/
 ~/.librewolf/librewolf.overrides.cfg
+~/.config/mimeapps.list
 /etc/cron.monthly/
 /etc/s6/config/connman.conf
 /etc/connman/main.conf
