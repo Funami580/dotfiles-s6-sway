@@ -53,7 +53,7 @@ export LC_MESSAGES=C
 export LC_PAPER=de_DE.UTF-8
 
 export PATH=$PATH:~/.cargo/bin/
-export BAT_PAGER="less -iFx4 --mouse --wheel-lines=4"
+export BAT_PAGER="less -RiFx4 --mouse --wheel-lines=4"
 export EXA_COLORS="reset:ex=31" # only color directories and executables
 
 alias lsx='exa -lbh --group-directories-first'
