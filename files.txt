@@ -10,6 +10,7 @@
 ~/.local/share/s6/
 ~/.librewolf/librewolf.overrides.cfg
 ~/.config/mimeapps.list
+/etc/elogind/logind.conf
 /etc/cron.monthly/
 /etc/s6/config/connman.conf
 /etc/connman/main.conf
