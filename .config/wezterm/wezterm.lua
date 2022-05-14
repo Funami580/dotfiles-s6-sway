@@ -33,6 +33,7 @@ return {
   canonicalize_pasted_newlines = "LineFeed",
   audible_bell = "Disabled",
   exit_behavior = "Close",
+  window_close_confirmation = "NeverPrompt",
   hide_tab_bar_if_only_one_tab = true,
   enable_scroll_bar = true,
   scrollback_lines = 10000,
