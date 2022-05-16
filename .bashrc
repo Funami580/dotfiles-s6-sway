@@ -159,6 +159,33 @@ run_java() {
     rm -rf "$tmp_dir"
 }
 
+scan() {
+    local i=0
+    while read -n1 -s; do
+        if [[ "$REPLY" == "q" ]]; then
+            break
+        fi
+        if [[ $i -ne 0 ]]; then
+            echo
+        fi
+        echo "Scanning picture $(($i + 1))..."
+        scanimage --resolution=300 --format=png --output-file "$i.png" --progress
+        let i++
+    done
+    if [[ $i -ne 0 ]]; then
+        echo
+        echo "Post-processing:"
+        echo "[1/2] Converting to jpg..."
+        for f in *.png; do
+            convert "$f" -rotate 180 "$f"
+            convert -quality 70 "$f" "${f%.png}.jpg"
+        done
+        echo "[2/2] Converting to pdf..."
+        convert *.jpg output.pdf
+        echo "Done!"
+    fi
+}
+
 s6db() {
     local DATAPATH="/home/${USER}/.local/share/s6"
     local RCPATH="${DATAPATH}/rc"
