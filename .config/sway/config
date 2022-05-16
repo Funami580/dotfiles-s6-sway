@@ -14,7 +14,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term wezterm
+set $term wezterm start --always-new-process
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -224,5 +224,5 @@ bindsym $mod+Mod1+t exec thunderbird
 bindsym $mod+Mod1+d exec dolphin
 bindsym $mod+Mod1+k exec kate
 bindsym $mod+Mod1+v exec mpv "$(wl-paste -n)"
-bindsym $mod+Mod1+Return exec $term start python3
-bindsym $mod+Control+Return exec $term start fend
+bindsym $mod+Mod1+Return exec $term -- python3
+bindsym $mod+Control+Return exec $term -- fend

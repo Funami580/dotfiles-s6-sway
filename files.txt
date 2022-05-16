@@ -14,6 +14,7 @@
 /etc/cron.monthly/
 /etc/s6/config/connman.conf
 /etc/connman/main.conf
+/usr/lib/dolphin-wezterm/dolphin-open-wezterm.sh
 /usr/share/applications/discord.desktop
 /usr/share/backgrounds/sway/night.jpg
 /usr/share/backgrounds/sway/plasma_5_11.png
