@@ -144,6 +144,10 @@ ord() {
     LC_CTYPE=C printf '%d\n' "'$1"
 }
 
+stfu() {
+    ("$@" &> /dev/null &)
+}
+
 run_java() {
     local cur_dir=$(pwd)
     local tmp_dir=$(mktemp -d)
