@@ -33,6 +33,8 @@ return {
         wezterm.background_child_process({"kill", "-9", info.pid})
       end
     end)},
+    {key="Backspace", mods="CTRL", action={SendKey={key="w", mods="CTRL"}}},
+    {key="Delete", mods="CTRL", action={SendKey={key="d", mods="ALT"}}},
   },
   window_padding = {
     left = 0,
@@ -51,6 +53,7 @@ return {
   hide_tab_bar_if_only_one_tab = true,
   enable_scroll_bar = true,
   scrollback_lines = 10000,
+  min_scroll_bar_height = "2cell",
   animation_fps = 1,
   check_for_updates = false,
   enable_wayland = true,
