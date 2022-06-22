@@ -26,7 +26,7 @@ if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
   # Start sway
   export XDG_CURRENT_DESKTOP=sway
   mkdir -p ~/.var/log/sway
-  dbus-launch --exit-with-session sway |& s6-log -b -- n3 s2000000 T ~/.var/log/sway
+  dbus-run-session sway |& s6-log -b -- n3 s2000000 T ~/.var/log/sway
 
   # Clean up s6 user services
   s6-rc -l /tmp/${USER}/s6-rc -bDa change
