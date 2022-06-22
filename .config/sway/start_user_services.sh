@@ -4,6 +4,10 @@ s6-rc -l /tmp/${USER}/s6-rc -bDa change
 rm -rf /tmp/${USER}/service
 find /tmp/${USER} -maxdepth 1 -type d -name s6-rc* -print0 | xargs -0 rm -r &> /dev/null || true
 
+# Fix OBS not working
+# https://github.com/emersion/xdg-desktop-portal-wlr/wiki/%22It-doesn't-work%22-Troubleshooting-Checklist
+dbus-update-activation-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+
 # Start new s6 user services
 mkdir -p /tmp/${USER}/service
 mkdir -p ~/.var/log/user-services
