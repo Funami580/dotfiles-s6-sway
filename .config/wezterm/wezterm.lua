@@ -8,6 +8,7 @@ return {
     "Noto Sans Symbols",
     "Noto Sans Symbols2",
   }),
+  harfbuzz_features = {"calt=0", "clig=0", "liga=0"},
   color_scheme = "F1r3w4tch",
   disable_default_key_bindings = true,
   key_map_preference = "Mapped",
