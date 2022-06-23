@@ -196,7 +196,7 @@ s6db() {
 
     if ! s6-rc-compile "${DBPATH}"-"${TIMESTAMP}" "${SVPATH}"; then
         echo "Error compiling database. Please double check the ${SVPATH} directories."
-        exit 1
+        return 1
     fi
 
     if [ -e "/tmp/${USER}/s6-rc" ]; then
