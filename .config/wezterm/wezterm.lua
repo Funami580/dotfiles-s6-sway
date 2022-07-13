@@ -23,10 +23,34 @@ return {
     {key="-", mods="CTRL", action="DecreaseFontSize"},
     {key="0", mods="CTRL", action="ResetFontSize"},
     {key="Numpad0", mods="CTRL", action="ResetFontSize"},
-    {key="PageUp", mods="", action=wezterm.action{ScrollByPage=-1}},
-    {key="PageDown", mods="", action=wezterm.action{ScrollByPage=1}},
-    {key="Home", mods="", action="ScrollToTop"},
-    {key="End", mods="", action="ScrollToBottom"},
+    {key="Home", mods="", action=wezterm.action_callback(function(window, pane)
+      if pane:is_alt_screen_active() then
+        window:perform_action(wezterm.action{SendKey={key="Home", mods=""}}, pane)
+      else
+        window:perform_action("ScrollToTop", pane)
+      end
+    end)},
+    {key="End", mods="", action=wezterm.action_callback(function(window, pane)
+      if pane:is_alt_screen_active() then
+        window:perform_action(wezterm.action{SendKey={key="End", mods=""}}, pane)
+      else
+        window:perform_action("ScrollToBottom", pane)
+      end
+    end)},
+    {key="PageUp", mods="", action=wezterm.action_callback(function(window, pane)
+      if pane:is_alt_screen_active() then
+        window:perform_action(wezterm.action{SendKey={key="PageUp", mods=""}}, pane)
+      else
+        window:perform_action(wezterm.action{ScrollByPage=-1}, pane)
+      end
+    end)},
+    {key="PageDown", mods="", action=wezterm.action_callback(function(window, pane)
+      if pane:is_alt_screen_active() then
+        window:perform_action(wezterm.action{SendKey={key="PageDown", mods=""}}, pane)
+      else
+        window:perform_action(wezterm.action{ScrollByPage=1}, pane)
+      end
+    end)},
     {key="F12", mods="", action=wezterm.action_callback(function(window, pane)
       local info = pane:get_foreground_process_info()
       local success, stdout, stderr = wezterm.run_child_process({"sh", "-c", "echo $PPID"})
@@ -56,6 +80,8 @@ return {
   scrollback_lines = 10000,
   min_scroll_bar_height = "2cell",
   animation_fps = 1,
+  cursor_blink_ease_in = "Constant",
+  cursor_blink_ease_out = "Constant",
   check_for_updates = false,
   enable_wayland = true,
 }
