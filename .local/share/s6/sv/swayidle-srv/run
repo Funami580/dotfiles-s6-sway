@@ -3,4 +3,4 @@ importas -iu ~ HOME
 envfile ${~}/.local/share/s6/config/swayidle.conf
 importas -uD "" OPTS OPTS
 fdmove -c 2 1
-exec bash -c "swayidle ${OPTS}"
+exec bash -c "exec swayidle ${OPTS}"
