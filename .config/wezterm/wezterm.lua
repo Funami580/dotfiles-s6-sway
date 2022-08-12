@@ -61,6 +61,18 @@ return {
     {key="Backspace", mods="CTRL", action={SendKey={key="w", mods="CTRL"}}},
     {key="Delete", mods="CTRL", action={SendKey={key="d", mods="ALT"}}},
   },
+  mouse_bindings = {
+    {
+      event={Down={streak=1, button={WheelUp=1}}},
+      mods="CTRL",
+      action="IncreaseFontSize",
+    },
+    {
+      event={Down={streak=1, button={WheelDown=1}}},
+      mods="CTRL",
+      action="DecreaseFontSize",
+    },
+  },
   window_padding = {
     left = 0,
     right = 0,
