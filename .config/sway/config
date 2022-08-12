@@ -214,6 +214,7 @@ bindsym Control+Shift+Print exec grim - | swappy -f -
 bindsym $mod+n split none
 bindsym $mod+t sticky toggle
 bindsym $mod+Control+Shift+q exec swaymsg -t get_tree | jq '.. | select(.type?) | select(.focused==true).pid' | xargs kill -9
+bindsym $mod+Mod1+l exec swaylock -fel -s fill -i /usr/share/backgrounds/sway/plasma_5_11.png
 
 bindsym $mod+Mod1+f exec librewolf
 bindsym $mod+Mod1+Control+f exec librewolf --private-window https://duckduckgo.com/
