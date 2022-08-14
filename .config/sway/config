@@ -19,7 +19,9 @@ set $term wezterm start --always-new-process
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 # set $menu dmenu_path | dmenu | xargs swaymsg exec --
-set $menu /usr/bin/j4-dmenu-desktop
+#
+# Current menu uses dmenu-rs in order to use render_minheight
+set $menu j4-dmenu-desktop --no-generic --dmenu "dmenu -i --render_minheight 26"
 
 ### Output configuration
 #
