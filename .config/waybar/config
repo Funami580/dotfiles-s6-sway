@@ -127,6 +127,7 @@
 			]
 		},
 		"on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+		"on-click-middle": "playerctl play-pause",
 		"scroll-step": 5,
 		"tooltip": false
 	},
