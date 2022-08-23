@@ -20,12 +20,11 @@ if [[ "$1" = "current" ]]; then
 fi
 
 LOCK="/tmp/${UID}-waybar-gamma"
-if ! mkdir "${LOCK}"; then
-  exit 0
-fi
-trap "rm -r '${LOCK}'" EXIT
 
-if [[ "$1" = "default" ]]; then
+if [[ "$1" = "start" ]]; then
+  rm -rf "${LOCK}"
+  rm -rf "${BRIGHTNESS_MODE}"
+  pkill -SIGRTMIN+8 -xnU ${UID} waybar
   while ! busctl --user -- set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 4500; do
     sleep 0.1
   done
@@ -34,6 +33,11 @@ if [[ "$1" = "default" ]]; then
   done
   exit 0
 fi
+
+if ! mkdir "${LOCK}"; then
+  exit 0
+fi
+trap "rm -r '${LOCK}'" EXIT
 
 if [[ -d "${BRIGHTNESS_MODE}" ]]; then
   if [[ "$1" = "switch-mode" ]]; then
