@@ -94,7 +94,7 @@
 	"custom/shutdown": {
 		"format": "",
 		"interval": "once",
-		"on-click": "[[ -n $(pidof swaynag) ]] && killall -9 swaynag || swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'loginctl terminate-user $(whoami)' -b 'Hibernate' 'killall swaynag; loginctl hibernate' -b 'Suspend' 'killall swaynag; loginctl suspend' -b 'Reboot' 'loginctl reboot' -b 'Shutdown' 'loginctl poweroff' -s ' X ' --font monospace --background 292b2e --button-background 1a1a1a --border 1a1a1a --border-bottom 1a1a1a --text fdf6e3 --button-text fdf6e3 --button-dismiss-gap 0 --button-gap 20 --button-border-size 0 --border-bottom-size 2 --message-padding 5 --button-padding 3",
+		"on-click": "pkill -fU ${UID} \"^swaynag .*Power Menu Options\" || swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'loginctl terminate-user $(id -ur)' -b 'Hibernate' 'pkill -fU ${UID} \"^swaynag .*Power Menu Options\"; loginctl hibernate' -b 'Suspend' 'pkill -fU ${UID} \"^swaynag .*Power Menu Options\"; loginctl suspend' -b 'Reboot' 'loginctl reboot' -b 'Shutdown' 'loginctl poweroff' -s ' X ' --font monospace --background 292b2e --button-background 1a1a1a --border 1a1a1a --border-bottom 1a1a1a --text fdf6e3 --button-text fdf6e3 --button-dismiss-gap 0 --button-gap 20 --button-border-size 0 --border-bottom-size 2 --message-padding 5 --button-padding 3",
 		"tooltip": false
 	},
 
