@@ -111,12 +111,14 @@
 	},
 	"clock#2": {
 		"format": "{:%a}",
-		"tooltip": false
+		"tooltip": false,
+		"interval": 1
 	},
 	"clock#3": {
 		"format": "{:%Y-%m-%d}",
 		"tooltip-format": "{:%OV}\n<tt><small>{calendar}</small></tt>",
-		"tooltip": true
+		"tooltip": true,
+		"interval": 1
 	},
 	"pulseaudio#1": {
 		"format": "{icon} {volume:2}%",
