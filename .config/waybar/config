@@ -80,12 +80,16 @@
 		"tooltip": true
 	},
 	"custom/night-color": {
-		"exec": "[[ -n $(pidof gammastep) ]] && echo -e '\\xef\\x86\\x86' || echo -e '\\xef\\x86\\x85'",
+		"exec": "~/.config/waybar/gamma.sh current",
 		"exec-if": "exit 0",
 		"exec-on-event": false,
 		"interval": "once",
-		"on-click-right": "~/.config/waybar/night-mode.sh",
-		"signal": 8
+		"on-click-right": "~/.config/waybar/gamma.sh toggle",
+		"on-click-middle": "~/.config/waybar/gamma.sh switch-mode",
+		"on-scroll-up": "~/.config/waybar/gamma.sh up",
+		"on-scroll-down": "~/.config/waybar/gamma.sh down",
+		"signal": 8,
+		"tooltip": false
 	},
 	"custom/shutdown": {
 		"format": "",

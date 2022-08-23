@@ -200,7 +200,7 @@ input * xkb_numlock enable
 exec swaymsg layout tabbed
 exec ~/.config/sway/start_user_services.sh
 exec ~/.config/sway/mute_microphone.sh
-exec ~/.config/waybar/night-mode.sh
+exec ~/.config/waybar/gamma.sh default
 
 # requires: playerctl, mpv-mpris
 bindsym XF86AudioPlay exec playerctl play-pause
