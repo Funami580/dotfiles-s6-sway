@@ -2,7 +2,7 @@
 # ~/.bash_profile
 #
 
-if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+function start_sway() {
   # Mozilla: Enable Wayland and WebRender
   export MOZ_ENABLE_WAYLAND=1
   export MOZ_WEBRENDER=1
@@ -27,9 +27,20 @@ if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
   export XDG_CURRENT_DESKTOP=sway
   mkdir -p ~/.var/log/sway
   dbus-run-session sway |& s6-log -b -- n3 s2000000 T ~/.var/log/sway
+  unset MOZ_ENABLE_WAYLAND MOZ_WEBRENDER MOZ_DBUS_REMOTE \
+        QT_QPA_PLATFORM QT_WAYLAND_DISABLE_WINDOWDECORATION \
+        _JAVA_AWT_WM_NONREPARENTING STUDIO_JDK \
+        XDG_CURRENT_DESKTOP
 
   # Clean up s6 user services
-  s6-rc -l /tmp/${USER}/s6-rc -bDa change
+  if [[ -d /tmp/${USER}/s6-rc ]]; then
+    s6-rc -l /tmp/${USER}/s6-rc -bDa change
+  fi
+  pkill -xU ${UID} s6-svscan
   rm -rf /tmp/${USER}/service
   find /tmp/${USER} -maxdepth 1 -type d -name s6-rc* -print0 | xargs -0 rm -r &> /dev/null || true
+}
+
+if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+  start_sway
 fi

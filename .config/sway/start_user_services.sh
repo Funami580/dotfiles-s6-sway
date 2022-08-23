@@ -1,6 +1,9 @@
 #!/bin/sh
 # Clean up old s6 user services
-s6-rc -l /tmp/${USER}/s6-rc -bDa change
+if [[ -d /tmp/${USER}/s6-rc ]]; then
+  s6-rc -l /tmp/${USER}/s6-rc -bDa change
+fi
+pkill -xU ${UID} s6-svscan
 rm -rf /tmp/${USER}/service
 find /tmp/${USER} -maxdepth 1 -type d -name s6-rc* -print0 | xargs -0 rm -r &> /dev/null || true
 
