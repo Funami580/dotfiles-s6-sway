@@ -20,7 +20,7 @@ window#waybar {
 
 #workspaces,
 #clock.1,
-#clock.2,
+#custom-clock-weather,
 #clock.3,
 #pulseaudio,
 #memory,
@@ -76,6 +76,7 @@ window#waybar {
 #cpu,
 #battery,
 #disk,
+#custom-clock-weather,
 #custom-network,
 #custom-memory,
 #custom-night-color,

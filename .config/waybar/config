@@ -12,7 +12,7 @@
 		"clock#1",
 		"custom/right-arrow-dark",
 		"custom/right-arrow-light",
-		"clock#2",
+		"custom/clock-weather",
 		"custom/right-arrow-dark",
 		"custom/right-arrow-light",
 		"clock#3",
@@ -109,9 +109,11 @@
 		"tooltip": true,
 		"interval": 1
 	},
-	"clock#2": {
-		"format": "{:%a}",
-		"tooltip": false,
+	"custom/clock-weather": {
+		"exec": "~/.config/waybar/weather.py",
+		"exec-if": "exit 0",
+		"return-type": "json",
+		"tooltip": true,
 		"interval": 1
 	},
 	"clock#3": {
