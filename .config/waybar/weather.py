@@ -170,11 +170,11 @@ def format_wind_speed(kmph: str | int) -> str:
     desc = beaufort_scale_to_description(beaufort_scale)
     return f"{kmph}km/h, {beaufort_scale} Bft ({desc})"
 
-def format_wind_direction(direction: str | int) -> str:
-    return str(direction).strip()
+def format_wind_direction(direction: str) -> str:
+    return direction.strip()
 
 def format_wind_short(kmph: str | int | float, direction: str) -> str:
-    return f"{hex_to_emoji(0x1F32C)} {str(kmph).rjust(2)}km/h {format_wind_direction(direction).ljust(3)}"
+    return f"{hex_to_emoji(0x1F32C)} {kmph}km/h {direction}"
 
 def format_humidity(humidity: str | int | float) -> str:
     return f"{humidity}%"
@@ -381,12 +381,13 @@ def output_json():
 
             hour_time = format_time(hour['time'])
             hour_weather_emoji = format_raw_emoji(WEATHER_CODE_TO_EMOJI[hour['weatherCode']])
-            hour_temp = format_temperature(hour['tempC'])
+            hour_temp = format_temperature(hour['tempC'].rjust(2))
+            hour_humidity = format_humidity_with_emoji(hour['humidity'].rjust(2))
+            hour_wind = format_wind_short(hour['windspeedKmph'].rjust(2), hour['winddir16Point'].ljust(3))
             hour_weather_condition = hour['weatherDesc'][0]['value']
-            hour_chances = format_chances(hour)
-            hour_humidity = format_humidity_with_emoji(hour['humidity'])
-            hour_wind = format_wind_short(hour['windspeedKmph'], hour['winddir16Point'])
             hour_wind_description = wind_kmph_to_beaufort_description(int(hour['windspeedKmph']))
+            hour_chances = format_chances(hour)
+
             data['tooltip'] += '<span allow_breaks="false">'
             data['tooltip'] += f"{hour_time} {hour_weather_emoji} {hour_temp} {hour_humidity} {hour_wind} "
             data['tooltip'] += f"{hour_weather_condition}, {hour_wind_description}, {hour_chances}"
