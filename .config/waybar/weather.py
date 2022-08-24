@@ -165,7 +165,7 @@ def format_time_12_to_24(time: str) -> str:
 def format_temperature(temp: str | int | float) -> str:
     return f"{temp}°C"
 
-def format_wind_speed(kmph: str | int | float) -> str:
+def format_wind_speed(kmph: str | int) -> str:
     beaufort_scale = wind_kmph_to_beaufort_scale(int(kmph))
     desc = beaufort_scale_to_description(beaufort_scale)
     return f"{kmph}km/h, {beaufort_scale} Bft ({desc})"
@@ -227,23 +227,26 @@ def format_moonset(time: str) -> str:
 def format_moon_illumination(illumination: str | int | float) -> str:
     return f"{illumination}%"
 
-def format_moon_phase(moon_phase: str) -> str:
+def format_moon_phase(moon_phase: str, is_southern_hemisphere: bool) -> str:
     # https://github.com/chubin/wttr.in/blob/e0cc061a64ba86cda1380f0409203a0fb8ae889c/lib/metno.py#L417-L426
+    # https://www.unicode.org/L2/L2017/17304-moon-var.pdf
     moon_phase_to_unicode_emoji = {
-        "New Moon": 0x1F311,
-        "Waxing Crescent": 0x1F312,
-        "First Quarter": 0x1F313,
-        "Waxing Gibbous": 0x1F314,
-        "Full Moon": 0x1F315,
-        "Waning Gibbous": 0x1F316,
-        "Last Quarter": 0x1F317,
-        "Waning Crescent": 0x1F318,
+        # emoji for (northern hemisphere, southern hemisphere)
+        "New Moon": (0x1F311, 0x1F311),
+        "Waxing Crescent": (0x1F312, 0x1F318),
+        "First Quarter": (0x1F313, 0x1F317),
+        "Waxing Gibbous": (0x1F314, 0x1F316),
+        "Full Moon": (0x1F315, 0x1F315),
+        "Waning Gibbous": (0x1F316, 0x1F314),
+        "Last Quarter": (0x1F317, 0x1F313),
+        "Waning Crescent": (0x1F318, 0x1F312),
     }
 
     moon_phase = moon_phase.strip()
 
     try:
-        return hex_to_emoji(moon_phase_to_unicode_emoji[moon_phase])
+        index = 1 if is_southern_hemisphere else 0
+        return hex_to_emoji(moon_phase_to_unicode_emoji[moon_phase][index])
     except Exception:
         return moon_phase
 
@@ -322,6 +325,7 @@ def output_json():
 
     tides = get_tides()
     todays_zenith = get_zenith()
+    is_southern_hemisphere = re.search(r'Lat (-?\d+(?:\.\d+)?)', weather['request'][0]['query']).groups()[0].startswith("-")
 
     # Current weather
     current_weather_condition = weather['current_condition'][0]['weatherDesc'][0]['value']
@@ -349,7 +353,7 @@ def output_json():
         day_min_temp = format_min_temp(day['mintempC'])
         day_sunrise = format_sunrise(day['astronomy'][0]['sunrise'])
         day_sunset = format_sunset(day['astronomy'][0]['sunset'])
-        day_moon_phase = format_moon_phase(day['astronomy'][0]['moon_phase'])
+        day_moon_phase = format_moon_phase(day['astronomy'][0]['moon_phase'], is_southern_hemisphere)
         day_moon_illumination = format_moon_illumination(day['astronomy'][0]['moon_illumination'])
         day_moonrise = format_moonrise(day['astronomy'][0]['moonrise'])
         day_moonset = format_moonset(day['astronomy'][0]['moonset'])
