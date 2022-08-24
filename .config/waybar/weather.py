@@ -68,14 +68,15 @@ WEATHER_CODE_TO_EMOJI = {
     '395': '❄️'
 }
 
-def get_website_with_cache(id: str, url: str, reload_secs: int) -> str:
+def get_website_with_cache(id: str, url: str, reload_secs: int, reload_new_day: bool) -> str:
     CACHE_FILE = f"/tmp/{os.getuid()}-waybar-{id}"
 
     try:
         curr_time = time.time()
         last_mtime = os.path.getmtime(CACHE_FILE)
+        new_day_time = datetime.now().replace(hour=0, minute=1, second=0, microsecond=0).timestamp()
 
-        if curr_time - last_mtime < reload_secs:
+        if (curr_time >= new_day_time and last_mtime < new_day_time) or curr_time - last_mtime < reload_secs:
             # return cache, if accessed within reload_secs seconds after last update
             with open(CACHE_FILE, "r") as f:
                 return f.read()
@@ -106,13 +107,13 @@ def get_website_with_cache(id: str, url: str, reload_secs: int) -> str:
     return None
 
 def get_weather() -> dict | None:
-    contents = get_website_with_cache(id="weather-cache", url=f"https://wttr.in/{LOCATION}?format=j1", reload_secs=2 * 60)
+    contents = get_website_with_cache(id="weather-cache", url=f"https://wttr.in/{LOCATION}?format=j1", reload_secs=3 * 60, reload_new_day=True)
     if contents is None:
         return None
     return json.loads(contents)
 
 def get_zenith() -> str | None:
-    contents = get_website_with_cache(id="zenith-cache", url=f"https://wttr.in/{LOCATION}?format=%z", reload_secs=60)
+    contents = get_website_with_cache(id="zenith-cache", url=f"https://wttr.in/{LOCATION}?format=%z", reload_secs=60 * 60 * 6, reload_new_day=True)
     if contents is None:
         return None
     return contents
@@ -120,7 +121,7 @@ def get_zenith() -> str | None:
 def get_tides() -> dict | None:
     if DISABLE_TIDES:
         return None
-    contents = get_website_with_cache(id="tides-cache", url=f"https://www.meerestemperatur.de/europa/deutschland/{LOCATION.lower()}/tides.html", reload_secs=60 * 60 * 24)
+    contents = get_website_with_cache(id="tides-cache", url=f"https://www.meerestemperatur.de/europa/deutschland/{LOCATION.lower()}/tides.html", reload_secs=60 * 60 * 24, reload_new_day=False)
     if contents is None:
         return None
     soup = BeautifulSoup(contents, "html.parser")
