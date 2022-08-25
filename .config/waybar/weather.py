@@ -8,7 +8,7 @@ import json
 import re
 import requests
 import locale
-from datetime import datetime
+from datetime import datetime, timedelta
 from bs4 import BeautifulSoup  # needed if DISABLE_TIDES is False
 from typing import List
 
@@ -138,6 +138,9 @@ def get_tides() -> dict | None:
             flood_times.append(flood_time)
         data[day_of_month] = flood_times
     return data
+
+def parse_date(date: str) -> datetime:
+    return datetime.strptime(date, "%Y-%m-%d")
 
 def hex_to_raw_emoji(hex: int) -> str:
     return f"&#{hex};"
@@ -342,14 +345,24 @@ def output_json():
     data['tooltip'] += f"Humidity: {current_humidity}\n"
 
     # Weather for next days
-    for i, day in enumerate(weather['weather']):
+    for day in weather['weather']:
+        day_date = day['date']
+        day_parsed_date = parse_date(day_date)
+        day_is_too_old = day_parsed_date < now.replace(hour=0, minute=0, second=0, microsecond=0)
+
+        if day_is_too_old:
+            continue
+
+        day_of_month = day_parsed_date.day
+        day_is_today = day_of_month == now.day
+        day_is_tomorrow = day_of_month == (now + timedelta(days=1)).day
+
         data['tooltip'] += f"\n<b>"
-        if i == 0:
+        if day_is_today:
             data['tooltip'] += "Today, "
-        if i == 1:
+        if day_is_tomorrow:
             data['tooltip'] += "Tomorrow, "
 
-        day_date = day['date']
         day_max_temp = format_max_temp(day['maxtempC'])
         day_min_temp = format_min_temp(day['mintempC'])
         day_sunrise = format_sunrise(day['astronomy'][0]['sunrise'])
@@ -367,20 +380,20 @@ def output_json():
         data['tooltip'] += f"{day_sunrise} {day_sunset} {day_moon_phase} "
         data['tooltip'] += f"{day_moonrise} – {day_moonset} ({day_moon_illumination})"
         if tides is not None:
-            day_of_month = int(day_date.split("-")[-1])
             day_tides = tides.get(day_of_month)
             if day_tides is not None:
                 data['tooltip'] += f" {format_tides(day_tides)}"
-        if i == 0 and todays_zenith is not None:
+        if day_is_today and todays_zenith is not None:
             data['tooltip'] += f" {format_zenith(todays_zenith)}"
         data['tooltip'] += "</span>\n"
 
         for hour in day['hourly']:
-            if i == 0:
-                if int(format_time(hour['time'])) < now.hour - 2:
+            hour_time = format_time(hour['time'])
+
+            if day_is_today:
+                if int(hour_time) < now.hour - 2:
                     continue
 
-            hour_time = format_time(hour['time'])
             hour_weather_emoji = format_raw_emoji(WEATHER_CODE_TO_EMOJI[hour['weatherCode']])
             hour_temp = format_temperature(hour['tempC'].rjust(2))
             hour_humidity = format_humidity_with_emoji(hour['humidity'].rjust(2))
