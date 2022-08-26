@@ -107,13 +107,13 @@ def get_website_with_cache(id: str, url: str, reload_secs: int, reload_new_day: 
     return None
 
 def get_weather() -> dict | None:
-    contents = get_website_with_cache(id="weather-cache", url=f"https://wttr.in/{LOCATION}?format=j1", reload_secs=3 * 60, reload_new_day=True)
+    contents = get_website_with_cache(id="weather-cache", url=f"https://wttr.in/{LOCATION}?format=j1", reload_secs=3 * 60, reload_new_day=False)
     if contents is None:
         return None
     return json.loads(contents)
 
 def get_zenith() -> str | None:
-    contents = get_website_with_cache(id="zenith-cache", url=f"https://wttr.in/{LOCATION}?format=%z", reload_secs=60 * 60 * 6, reload_new_day=True)
+    contents = get_website_with_cache(id="zenith-cache", url=f"https://wttr.in/{LOCATION}?format=%z", reload_secs=60 * 60, reload_new_day=True)
     if contents is None:
         return None
     return contents
@@ -136,6 +136,7 @@ def get_tides() -> dict | None:
         for flood in info.select(".label-danger"):
             flood_time = flood.findNext("td").getText()
             flood_times.append(flood_time)
+        assert day_of_month not in data
         data[day_of_month] = flood_times
     return data
 
