@@ -114,7 +114,8 @@
 		"exec-if": "exit 0",
 		"return-type": "json",
 		"tooltip": true,
-		"interval": 1
+		"interval": 1,
+		"on-click-middle": "xdg-open 'https://www.wetteronline.de/wetter/LOCATION'"
 	},
 	"clock#3": {
 		"format": "{:%Y-%m-%d}",
