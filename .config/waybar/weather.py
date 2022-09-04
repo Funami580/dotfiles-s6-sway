@@ -161,11 +161,14 @@ def format_weekday(date: datetime) -> str:
 def format_time(time: str) -> str:
     return time.removesuffix("00").zfill(2)
 
-def format_time_12_to_24(time: str) -> str:
+def format_time_12_to_24(time: str) -> str | None:
     # https://stackoverflow.com/questions/19229190/how-to-convert-am-pm-timestmap-into-24hs-format-in-python
-    in_time = datetime.strptime(time, "%I:%M %p")
-    out_time = datetime.strftime(in_time, "%H:%M")
-    return out_time
+    try:
+        in_time = datetime.strptime(time, "%I:%M %p")
+        out_time = datetime.strftime(in_time, "%H:%M")
+        return out_time
+    except Exception:
+        return None
 
 def format_temperature(temp: str | int | float) -> str:
     return f"{temp}°C"
@@ -223,11 +226,17 @@ def format_sunrise(time: str) -> str:
 def format_sunset(time: str) -> str:
     return f"{hex_to_emoji(0x1F307)} {format_time_12_to_24(time)}"
 
-def format_moonrise(time: str) -> str:
-    return format_time_12_to_24(time)
+def format_moonrise(time: str) -> str | None:
+    moon_time = format_time_12_to_24(time)
+    if moon_time is None:
+        return None
+    return f"{hex_to_emoji(0x2B06)} {moon_time}"
 
-def format_moonset(time: str) -> str:
-    return format_time_12_to_24(time)
+def format_moonset(time: str) -> str | None:
+    moon_time = format_time_12_to_24(time)
+    if moon_time is None:
+        return None
+    return f"{hex_to_emoji(0x2B07)} {moon_time}"
 
 def format_moon_illumination(illumination: str | int | float) -> str:
     return f"{illumination}%"
@@ -370,8 +379,19 @@ def output_json():
         day_sunset = format_sunset(day['astronomy'][0]['sunset'])
         day_moon_phase = format_moon_phase(day['astronomy'][0]['moon_phase'], is_southern_hemisphere)
         day_moon_illumination = format_moon_illumination(day['astronomy'][0]['moon_illumination'])
-        day_moonrise = format_moonrise(day['astronomy'][0]['moonrise'])
-        day_moonset = format_moonset(day['astronomy'][0]['moonset'])
+        day_moonrise_unformatted = day['astronomy'][0]['moonrise']
+        day_moonset_unformatted = day['astronomy'][0]['moonset']
+        day_moonrise = format_moonrise(day_moonrise_unformatted)
+        day_moonset = format_moonset(day_moonset_unformatted)
+        day_moon = [day_moonrise, day_moonset]
+
+        if day_moonrise is not None and day_moonset is not None:
+            def to_minutes(time):
+                split = format_time_12_to_24(time).split(":")
+                return 60*int(split[0]) + int(split[1])
+            if to_minutes(day_moonset_unformatted) < to_minutes(day_moonrise_unformatted):
+                day_moon[0], day_moon[1] = day_moon[1], day_moon[0]
+        day_moon = [item for item in day_moon if item is not None]
 
         data['tooltip'] += f"{day_date}</b>\n"
 
@@ -379,7 +399,7 @@ def output_json():
         data['tooltip'] += '<span allow_breaks="false">'
         data['tooltip'] += f"{day_max_temp} {day_min_temp} "
         data['tooltip'] += f"{day_sunrise} {day_sunset} {day_moon_phase} "
-        data['tooltip'] += f"{day_moonrise} – {day_moonset} ({day_moon_illumination})"
+        data['tooltip'] += f"{' '.join(day_moon)} ({day_moon_illumination})"
         if tides is not None:
             day_tides = tides.get(day_of_month)
             if day_tides is not None:
