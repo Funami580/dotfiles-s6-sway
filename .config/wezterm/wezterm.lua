@@ -51,6 +51,10 @@ return {
         window:perform_action(wezterm.action{ScrollByPage=1}, pane)
       end
     end)},
+    {key="Home", mods="CTRL", action=wezterm.action{SendKey={key="Home", mods=""}}},
+    {key="End", mods="CTRL", action=wezterm.action{SendKey={key="End", mods=""}}},
+    {key="PageUp", mods="CTRL", action=wezterm.action{SendKey={key="PageUp", mods=""}}},
+    {key="PageDown", mods="CTRL", action=wezterm.action{SendKey={key="PageDown", mods=""}}},
     {key="F12", mods="", action=wezterm.action_callback(function(window, pane)
       local info = pane:get_foreground_process_info()
       local success, stdout, stderr = wezterm.run_child_process({"sh", "-c", "echo $PPID"})
@@ -60,6 +64,7 @@ return {
     end)},
     {key="Backspace", mods="CTRL", action={SendKey={key="w", mods="CTRL"}}},
     {key="Delete", mods="CTRL", action={SendKey={key="d", mods="ALT"}}},
+    {key="u", mods="CTRL|SHIFT", action=wezterm.action{CharSelect={copy_on_select=true, copy_to="Clipboard"}}},
   },
   mouse_bindings = {
     {
@@ -95,6 +100,7 @@ return {
   animation_fps = 1,
   cursor_blink_ease_in = "Constant",
   cursor_blink_ease_out = "Constant",
+  detect_password_input = false,
   check_for_updates = false,
   enable_wayland = true,
 }
