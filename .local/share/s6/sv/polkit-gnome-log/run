@@ -1,0 +1,6 @@
+#!/bin/execlineb -P
+importas -iu ~ HOME
+envfile ${~}/.local/share/s6/config/polkit-gnome.conf
+importas -sCuD "n3 s2000000 T" DIRECTIVES DIRECTIVES
+foreground { install -d ${~}/.var/log/polkit-gnome }
+exec -c s6-log -d3 -b -- ${DIRECTIVES} ${~}/.var/log/polkit-gnome
