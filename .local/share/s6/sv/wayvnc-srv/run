@@ -1,0 +1,5 @@
+#!/bin/execlineb -P
+fdmove -c 2 1
+foreground { if -n { pipeline { swaymsg -t get_outputs } grep -q HEADLESS-1 } swaymsg create_output }
+foreground { swaymsg "output HEADLESS-1 mode 1366x768" }
+exec wayvnc --output=HEADLESS-1 --keyboard=de --render-cursor --gpu 0.0.0.0

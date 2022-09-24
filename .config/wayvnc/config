@@ -1,0 +1,5 @@
+enable_auth=true
+username=username
+password=password
+private_key_file=/home/username/.config/wayvnc/key.pem
+certificate_file=/home/username/.config/wayvnc/cert.pem
