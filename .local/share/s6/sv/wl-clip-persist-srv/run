@@ -1,0 +1,3 @@
+#!/bin/execlineb -P
+fdmove -c 2 1
+exec wl-clip-persist --clipboard regular --read-timeout 50 --ignore-event-on-timeout --all-mime-type-regex "(?i)^(?!(?:image|audio|video|font|model)/).+" --selection-size-limit 524288 --interrupt-old-clipboard-requests
