@@ -4,7 +4,7 @@ while true; do
   if [[ $? = 0 ]]; then
     break
   fi
-  pactl set-source-volume @DEFAULT_SOURCE@ 50%
   pactl set-source-mute @DEFAULT_SOURCE@ 1
+  pactl set-source-volume @DEFAULT_SOURCE@ 50%
   sleep 0.1
 done
