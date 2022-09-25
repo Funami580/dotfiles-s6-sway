@@ -20,8 +20,7 @@ set $term wezterm start --always-new-process
 # on the original workspace that the command was run on.
 # set $menu dmenu_path | dmenu | xargs swaymsg exec --
 #
-# Current menu uses dmenu-rs in order to use render_minheight
-set $menu j4-dmenu-desktop --no-generic --dmenu "dmenu -i --render_minheight 26"
+set $menu j4-dmenu-desktop --no-generic --wrapper="swaymsg exec" --dmenu "bemenu -i -p '' --line-height=26 --ch=17 --cw=2 --hp 10 --nf=#bbbbbb --nb=#222222 --af=#bbbbbb --ab=#222222 --fb=#222222 --hf=#eeeeee --hb=#005577"
 
 ### Output configuration
 #
@@ -122,8 +121,32 @@ output * bg /usr/share/backgrounds/sway/night.jpg fill
     bindsym $mod+Shift+8 move container to workspace number 8
     bindsym $mod+Shift+9 move container to workspace number 9
     bindsym $mod+Shift+0 move container to workspace number 10
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
+#
+# Remote workspaces:
+#
+    set $remote_keyboard 0:0:virtual_keyboard
+    # Switch to workspace
+    bindsym --input-device=$remote_keyboard $mod+1 workspace r1
+    bindsym --input-device=$remote_keyboard $mod+2 workspace r2
+    bindsym --input-device=$remote_keyboard $mod+3 workspace r3
+    bindsym --input-device=$remote_keyboard $mod+4 workspace r4
+    bindsym --input-device=$remote_keyboard $mod+5 workspace r5
+    bindsym --input-device=$remote_keyboard $mod+6 workspace r6
+    bindsym --input-device=$remote_keyboard $mod+7 workspace r7
+    bindsym --input-device=$remote_keyboard $mod+8 workspace r8
+    bindsym --input-device=$remote_keyboard $mod+9 workspace r9
+    bindsym --input-device=$remote_keyboard $mod+0 workspace r10
+    # Move focused container to workspace
+    bindsym --input-device=$remote_keyboard $mod+Shift+1 move container to workspace r1
+    bindsym --input-device=$remote_keyboard $mod+Shift+2 move container to workspace r2
+    bindsym --input-device=$remote_keyboard $mod+Shift+3 move container to workspace r3
+    bindsym --input-device=$remote_keyboard $mod+Shift+4 move container to workspace r4
+    bindsym --input-device=$remote_keyboard $mod+Shift+5 move container to workspace r5
+    bindsym --input-device=$remote_keyboard $mod+Shift+6 move container to workspace r6
+    bindsym --input-device=$remote_keyboard $mod+Shift+7 move container to workspace r7
+    bindsym --input-device=$remote_keyboard $mod+Shift+8 move container to workspace r8
+    bindsym --input-device=$remote_keyboard $mod+Shift+9 move container to workspace r9
+    bindsym --input-device=$remote_keyboard $mod+Shift+0 move container to workspace r10
 #
 # Layout stuff:
 #
@@ -200,7 +223,7 @@ input * xkb_numlock enable
 exec swaymsg layout tabbed
 exec ~/.config/sway/start_user_services.sh
 exec ~/.config/sway/mute_microphone.sh
-exec ~/.config/waybar/gamma.sh start
+exec sleep 0.5 && ~/.config/waybar/gamma.sh start
 
 # Disable scrolling through tabs
 bindsym button4 nop
@@ -233,8 +256,8 @@ bindsym $mod+Mod1+l exec swaylock -fel -s fill -i /usr/share/backgrounds/sway/pl
 
 bindsym $mod+Mod1+f exec librewolf
 bindsym $mod+Mod1+Control+f exec librewolf --private-window https://duckduckgo.com/
-bindsym $mod+Mod1+c exec chromium
-bindsym $mod+Mod1+Control+c exec chromium --incognito
+bindsym $mod+Mod1+c exec chromium --ozone-platform=wayland
+bindsym $mod+Mod1+Control+c exec chromium --incognito --ozone-platform=wayland
 bindsym $mod+Mod1+h exec cliphist list | dmenu | cliphist decode | wl-copy
 bindsym $mod+Mod1+t exec betterbird
 bindsym $mod+Mod1+d exec dolphin

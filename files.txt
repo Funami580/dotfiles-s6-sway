@@ -5,9 +5,11 @@
 ~/.config/mako/
 ~/.config/swappy/
 ~/.config/fastfetch/presets/
+~/.config/wayvnc/
 ~/.config/fontconfig/
 ~/.fonts/fa-*
 ~/.local/share/s6/
+~/.local/share/applications/*.desktop
 ~/.librewolf/librewolf.overrides.cfg
 ~/.config/mimeapps.list
 /etc/elogind/logind.conf
@@ -15,6 +17,5 @@
 /etc/s6/config/connman.conf
 /etc/connman/main.conf
 /usr/lib/dolphin-wezterm/dolphin-open-wezterm.sh
-/usr/share/applications/discord.desktop
 /usr/share/backgrounds/sway/night.jpg
 /usr/share/backgrounds/sway/plasma_5_11.png
