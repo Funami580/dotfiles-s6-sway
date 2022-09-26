@@ -20,7 +20,8 @@ set $term wezterm start --always-new-process
 # on the original workspace that the command was run on.
 # set $menu dmenu_path | dmenu | xargs swaymsg exec --
 #
-set $menu j4-dmenu-desktop --no-generic --wrapper="swaymsg exec" --dmenu "bemenu -i -p '' --line-height=26 --ch=17 --cw=2 --hp 10 --nf=#bbbbbb --nb=#222222 --af=#bbbbbb --ab=#222222 --fb=#222222 --hf=#eeeeee --hb=#005577"
+set $bemenu bemenu -i -p '' --line-height=26 --ch=17 --cw=2 --hp 10 --nf=#bbbbbb --nb=#222222 --af=#bbbbbb --ab=#222222 --fb=#222222 --hf=#eeeeee --hb=#005577
+set $menu j4-dmenu-desktop --no-generic --wrapper="swaymsg exec" --dmenu "$bemenu"
 
 ### Output configuration
 #
@@ -260,7 +261,7 @@ bindsym $mod+Mod1+f exec librewolf
 bindsym $mod+Mod1+Control+f exec librewolf --private-window https://duckduckgo.com/
 bindsym $mod+Mod1+c exec chromium --ozone-platform=wayland
 bindsym $mod+Mod1+Control+c exec chromium --incognito --ozone-platform=wayland
-bindsym $mod+Mod1+h exec cliphist list | dmenu | cliphist decode | wl-copy
+bindsym $mod+Mod1+h exec cliphist list | $bemenu | cliphist decode | wl-copy
 bindsym $mod+Mod1+t exec betterbird
 bindsym $mod+Mod1+d exec dolphin
 bindsym $mod+Mod1+k exec kate
