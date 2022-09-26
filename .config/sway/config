@@ -220,6 +220,8 @@ for_window [class="jetbrains-idea" title="win0"] floating enable
 input * xkb_layout "de"
 input * xkb_numlock enable
 
+focus_wrapping workspace
+
 exec swaymsg layout tabbed
 exec ~/.config/sway/start_user_services.sh
 exec ~/.config/sway/mute_microphone.sh
