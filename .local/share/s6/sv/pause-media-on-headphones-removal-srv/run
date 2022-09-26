@@ -1,0 +1,4 @@
+#!/bin/execlineb -P
+fdmove -c 2 1
+foreground { sleep 5 }
+exec pause-media-on-headphones-removal
