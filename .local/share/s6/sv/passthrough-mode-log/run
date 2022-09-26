@@ -1,0 +1,6 @@
+#!/bin/execlineb -P
+importas -iu ~ HOME
+envfile ${~}/.local/share/s6/config/passthrough-mode.conf
+importas -sCuD "n3 s2000000 T" DIRECTIVES DIRECTIVES
+foreground { install -d ${~}/.var/log/passthrough-mode }
+exec -c s6-log -d3 -b -- ${DIRECTIVES} ${~}/.var/log/passthrough-mode

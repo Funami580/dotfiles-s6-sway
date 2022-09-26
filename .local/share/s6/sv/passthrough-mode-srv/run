@@ -1,0 +1,8 @@
+#!/bin/execlineb -P
+importas -iu ~ HOME
+envfile ${~}/.local/share/s6/config/passthrough-mode.conf
+importas -iu WINDOW_FILTER WINDOW_FILTER
+fdmove -c 2 1
+pipeline { swaymsg -t subscribe -m "['window']" }
+pipeline { jq -r --unbuffered "select(.change==\"focus\" and .container.focused).container | (if .app_id then .app_id else .window_properties.class end) | select (.!=null)" }
+forstdin -E window_name ifelse { pipeline { echo "${window_name}" } grep -q "${WINDOW_FILTER}" } { swaymsg "mode passthrough" } swaymsg "mode default"
