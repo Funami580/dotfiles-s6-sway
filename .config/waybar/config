@@ -1,0 +1,181 @@
+// Original version: https://github.com/cjbassi/config/tree/master/.config/waybar
+// -*- mode: json -*-
+
+{
+	"layer": "bottom",
+	"position": "top",
+
+	"modules-left": [
+		"sway/workspaces",
+		"custom/right-arrow-dark",
+		"custom/right-arrow-light",
+		"clock#1",
+		"custom/right-arrow-dark",
+		"custom/right-arrow-light",
+		"clock#2",
+		"custom/right-arrow-dark",
+		"custom/right-arrow-light",
+		"clock#3",
+		"custom/right-arrow-dark"
+	],
+	"modules-right": [
+		"custom/left-arrow-dark",
+		"pulseaudio#2",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"pulseaudio#1",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"custom/network",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"cpu",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"custom/memory",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"_battery",
+		"_custom/left-arrow-light",
+		"_custom/left-arrow-dark",
+		"disk",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"custom/night-color",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"custom/shutdown"
+	],
+
+	"custom/left-arrow-dark": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-light": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-dark": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-light": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/network": {
+		"exec": "if connmanctl state | grep -qE 'State = (online|ready)'; then echo -e '\\xef\\x9e\\x96 eth0'; else echo -e 'eth0'; fi",
+		"exec-if": "exit 0",
+		"interval": 1,
+		"on-click-right": "connmanctl state | grep -q 'OfflineMode = False'; [[ $? = 0 ]] && connmanctl enable offline || connmanctl disable offline",
+		"tooltip": false
+	},
+	"custom/memory": {
+		"interval": 5,
+		"format": "Mem {}%",
+		"return-type": "json",
+		"exec": "~/.config/waybar/mem.sh",
+		"exec-if": "exit 0",
+		"tooltip": true
+	},
+	"custom/night-color": {
+		"exec": "~/.config/waybar/gamma.sh current",
+		"exec-if": "exit 0",
+		"exec-on-event": false,
+		"interval": "once",
+		"on-click-right": "~/.config/waybar/gamma.sh toggle",
+		"on-click-middle": "~/.config/waybar/gamma.sh switch-mode",
+		"on-scroll-up": "~/.config/waybar/gamma.sh up",
+		"on-scroll-down": "~/.config/waybar/gamma.sh down",
+		"signal": 8,
+		"tooltip": false
+	},
+	"custom/shutdown": {
+		"format": "",
+		"interval": "once",
+		"on-click": "pkill -fU ${UID} \"^swaynag .*Power Menu Options\" || swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'loginctl terminate-user $(id -ur)' -b 'Suspend' 'pkill -fU ${UID} \"^swaynag .*Power Menu Options\"; loginctl suspend' -b 'Reboot' 'loginctl reboot' -b 'Shutdown' 'loginctl poweroff' -s ' X ' --font monospace --background 292b2e --button-background 1a1a1a --border 1a1a1a --border-bottom 1a1a1a --text fdf6e3 --button-text fdf6e3 --button-dismiss-gap 0 --button-gap 20 --button-border-size 0 --border-bottom-size 2 --message-padding 5 --button-padding 3",
+		"tooltip": false
+	},
+
+	"sway/workspaces": {
+		"disable-scroll": true,
+		"format": "{name}"
+	},
+
+	"clock#1": {
+		"format": "{:%H:%M}",
+		"tooltip-format": "{:%H:%M:%S}",
+		"tooltip": true,
+		"interval": 1
+	},
+	"clock#2": {
+		"format": "{:%a}",
+		"tooltip": false,
+		"interval": 1,
+		"on-click-middle": "xdg-open 'https://www.wetteronline.de/wetter/LOCATION'"
+	},
+	"clock#3": {
+		"format": "{:%Y-%m-%d}",
+		"tooltip-format": "{:%OV}\n<tt><small>{calendar}</small></tt>",
+		"tooltip": true,
+		"interval": 1
+	},
+	"pulseaudio#1": {
+		"format": "{icon} {volume:2}%",
+		"format-bluetooth": "{icon}  {volume}%",
+		"format-muted": " MUTE",
+		"format-icons": {
+			"headphones": "",
+			"default": [
+				"",
+				"",
+				""
+			]
+		},
+		"on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+		"on-click-middle": "playerctl play-pause",
+		"scroll-step": 5,
+		"tooltip": false
+	},
+	"pulseaudio#2": {
+		"format": "{format_source}",
+		"format-source": " {volume}%",
+		"format-source-muted": " MUTE",
+		"on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ $(echo -e \"$((5+$(pactl get-source-volume @DEFAULT_SOURCE@ | awk '{ print $5 }' | tr -d '%')))\\n100\" | sort -h | head -n1)%",
+		"on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -5%",
+		"on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+		"scroll-step": 5,
+		"tooltip": false
+	},
+	"memory": {
+		"interval": 5,
+		"format": "Mem {}%"
+	},
+	"cpu": {
+		"interval": 5,
+		"format": "CPU {usage:2}%"
+	},
+	"battery": {
+		"states": {
+			"good": 95,
+			"warning": 30,
+			"critical": 15
+		},
+		"format": "{icon} {capacity}%",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			""
+		]
+	},
+	"disk": {
+		"interval": 5,
+		"format": "Disk {percentage_used:2}%",
+		"path": "/"
+	},
+	"tray": {
+		"icon-size": 20
+	}
+}

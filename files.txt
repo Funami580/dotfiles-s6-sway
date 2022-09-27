@@ -1,0 +1,11 @@
+~/.bashrc
+~/.config/sway/config
+~/.config/waybar/config
+~/.config/waybar/mem.sh
+~/.local/share/s6/sv/default/contents.d/pause-media-on-headphones-removal
+~/.local/share/s6/sv/default/contents.d/passthrough-mode
+~/.librewolf/librewolf.overrides.cfg
+/etc/cron.weekly/
+/etc/s6/config/earlyoom.conf
+/etc/modprobe.d/nobluetooth.conf
+/usr/share/backgrounds/sway/lain.png
