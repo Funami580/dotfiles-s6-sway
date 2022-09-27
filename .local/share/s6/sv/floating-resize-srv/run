@@ -1,0 +1,18 @@
+#!/bin/execlineb -P
+importas -iu ~ HOME
+envfile ${~}/.local/share/s6/config/floating-resize.conf
+importas -iu WINDOW_FILTER WINDOW_FILTER
+importas -iu RESIZE_WIDTH RESIZE_WIDTH
+importas -iu RESIZE_HEIGHT RESIZE_HEIGHT
+importas -iu POSITION_CENTER POSITION_CENTER
+fdmove -c 2 1
+pipeline { swaymsg -t subscribe -m "['window']" }
+pipeline { jq -r --unbuffered "select(.change==\"floating\" and .container.type==\"floating_con\" and .container.focused and all(.container.marks[]; .!=\"_floating_resize\")).container | [(.id | tostring), (if .app_id then .app_id else .window_properties.class end)] | select (.[1]!=null) | join(\";\")" }
+forstdin -E id_and_window_name
+backtick -E window_name { pipeline { echo ${id_and_window_name} } cut -d ";" -f 1 --complement }
+if { pipeline { echo "${window_name}" } grep -q "${WINDOW_FILTER}" }
+backtick -E id { pipeline { echo ${id_and_window_name} } cut -d ";" -f 1 }
+foreground { sleep 0.1 }
+foreground { swaymsg "[con_id=${id}] mark --add '_floating_resize', resize set ${RESIZE_WIDTH} ${RESIZE_HEIGHT}" }
+if { test "${POSITION_CENTER}" = "true" }
+swaymsg "[con_id=${id}] move position center"
