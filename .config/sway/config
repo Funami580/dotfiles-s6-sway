@@ -211,12 +211,11 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Custom
-for_window [app_id="librewolf" title="About LibreWolf"] floating enable
-for_window [app_id="librewolf" title="Picture-in-Picture"] floating enable, resize set 800 450
-for_window [app_id="librewolf" title="Extension: \(Tree Style Tab\) - Close tabs\?.*"] floating enable
-for_window [app_id="thunderbird" title="Über Mozilla Thunderbird"] floating enable
-for_window [app_id="org.kde.dolphin" title="Kopiervorgang.*"] floating enable
-for_window [class="jetbrains-idea" title="win0"] floating enable
+for_window [app_id="librewolf" title="About LibreWolf"] floating enable, move position center
+for_window [app_id="librewolf" title="Picture-in-Picture"] floating enable, resize set 800 450, move position center
+for_window [app_id="betterbird" title="About Betterbird"] floating enable, move position center
+for_window [app_id="org.kde.dolphin" title="Kopiervorgang.*"] floating enable, move position center
+for_window [class="jetbrains-idea" title="win0"] floating enable, move position center
 
 input * xkb_layout "de"
 input * xkb_numlock enable
