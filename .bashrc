@@ -109,6 +109,8 @@ alias system='echo -e "CPU\n$(cpu | sed "s/^/> /")\n\nMemory\n$(memory | sed "s/
 alias ipl='ip a | awk "/inet .+\..+\..+\..+/ {print \$2}" | tail -n -1 | cut -d "/" -f 1'
 alias ipr='echo -e "$(timeout 1 curl -s -4 ifconfig.co || echo No IPv4 found)\n$(timeout 1 curl -s -6 ifconfig.co || echo No IPv6 found)"'
 
+alias wakeup='pkill -xU $(id -ur) "vncviewer"; wol -i 192.168.178.125 MAC_ADDRESS'
+
 # From: https://github.com/EaterOA/dotfiles/blob/master/.bashrc
 # copy from stdin or file into X clipboard
 alias copy='wl-copy'
