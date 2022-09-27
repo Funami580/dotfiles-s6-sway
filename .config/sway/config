@@ -268,3 +268,4 @@ bindsym $mod+Mod1+k exec kate
 bindsym $mod+Mod1+v exec mpv "$(wl-paste -n)"
 bindsym $mod+Mod1+Return exec $term -- python3
 bindsym $mod+Control+Return exec $term -- fend
+bindsym $mod+Mod1+o exec ~/.config/sway/toggle_size.sh
