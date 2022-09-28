@@ -29,6 +29,9 @@
 		"custom/network",
 		"custom/left-arrow-light",
 		"custom/left-arrow-dark",
+		"battery",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
 		"cpu",
 		"custom/left-arrow-light",
 		"custom/left-arrow-dark",
@@ -36,9 +39,6 @@
 		"custom/left-arrow-light",
 		"custom/left-arrow-dark",
 		"disk",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-		"battery",
 		"custom/left-arrow-light",
 		"custom/left-arrow-dark",
 		"custom/night-color",
@@ -168,7 +168,8 @@
 			"",
 			"",
 			""
-		]
+		],
+		"format-charging": "? {capacity}%"
 	},
 	"disk": {
 		"interval": 5,
