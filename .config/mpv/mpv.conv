@@ -1,0 +1,9 @@
+vo=gpu
+hwdec=vaapi
+video-sync=display-resample
+
+demuxer-max-bytes=50MiB
+demuxer-max-back-bytes=25MiB
+demuxer-readahead-secs=20
+
+ytdl-raw-options-append=format-sort=+vcodec:avc,height:1100
