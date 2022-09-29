@@ -62,10 +62,31 @@ window#waybar {
 #cpu {
 	color: #6c71c4;
 }
-#battery,
+
 #custom-network {
 	color: #859900;
 }
+
+#battery {
+	color: #859900;
+}
+
+#battery.high {
+	color: #b58900;
+}
+
+#battery.good:not(.charging) {
+	color: #859900;
+}
+
+#battery.warning:not(.charging) {
+	color: #b58900;
+}
+
+#battery.critical:not(.charging) {
+	color: #b81414;
+}
+
 #disk {
 	color: #b58900;
 }

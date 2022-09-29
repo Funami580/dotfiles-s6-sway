@@ -159,9 +159,11 @@
 		"format": "CPU {usage:2}%"
 	},
 	"battery": {
+		"interval": 1,
 		"states": {
-			"good": 95,
-			"warning": 30,
+			"high": 100,
+			"good": 89,
+			"warning": 49,
 			"critical": 15
 		},
 		"format": "{icon} {capacity}%",
@@ -171,7 +173,8 @@
 			"",
 			"",
 			""
-		]
+		],
+		"format-charging": " {capacity}%"
 	},
 	"disk": {
 		"interval": 5,
