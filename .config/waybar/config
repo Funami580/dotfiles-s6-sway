@@ -158,8 +158,9 @@
 	"battery": {
 		"interval": 1,
 		"states": {
-			"good": 95,
-			"warning": 30,
+			"high": 100,
+			"good": 89,
+			"warning": 49,
 			"critical": 15
 		},
 		"format": "{icon} {capacity}%",
