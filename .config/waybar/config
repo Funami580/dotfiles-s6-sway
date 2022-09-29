@@ -171,7 +171,7 @@
 			"",
 			""
 		],
-		"format-charging": "? {capacity}%"
+		"format-charging": " {capacity}%"
 	},
 	"disk": {
 		"interval": 5,
