@@ -97,6 +97,7 @@ return {
   scrollback_lines = 10000,
   min_scroll_bar_height = "2cell",
   alternate_buffer_wheel_scroll_speed = 5,
+  mux_output_parser_coalesce_delay_ms = 0,
   animation_fps = 1,
   cursor_blink_ease_in = "Constant",
   cursor_blink_ease_out = "Constant",
