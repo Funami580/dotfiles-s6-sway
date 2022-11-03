@@ -10,6 +10,7 @@
 ~/.fonts/fa-*
 ~/.local/share/s6/
 ~/.local/share/applications/*.desktop
+~/.local/share/applications/*.sh
 ~/.librewolf/librewolf.overrides.cfg
 ~/.config/mimeapps.list
 /etc/elogind/logind.conf
