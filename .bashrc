@@ -220,6 +220,34 @@ s6db() {
     echo "    Remove any old unwanted/unneeded database directories in ${RCPATH}."
 }
 
+fonts() {
+    fc-list -b | python3 -c '
+import sys
+import re
+for font in sys.stdin.read().strip().split("\n\n"):
+  names = None
+  styles = None
+  filename = None
+  for line in font.splitlines():
+    line = line.strip()
+    matches = re.findall(r"\"([^\"]+)\"", line)
+    if line.startswith("family: "):
+      if names is None:
+        assert matches, f"Error in line: {line}"
+        names = matches
+    elif line.startswith("fullname: "):
+      assert matches, f"Error in line: {line}"
+      names = matches
+    elif line.startswith("file: "):
+      assert matches, f"Error in line: {line}"
+      filename = matches[0]
+  assert names is not None, f"Error in font: {font}"
+  assert filename is not None, f"Error in font: {font}"
+  for name in names:
+    print(f"{name} \1:\1 {filename}")
+' | fzf --preview 'echo {} | sed "s/ "'$'\1''":"'$'\1''" /\n/"' | sed 's/^.* '$'\1'':'$'\1'' //' | xargs -I% fontview '%'
+}
+
 source ~/.config/broot/launcher/bash/br
 
 if [[ ! -v DISABLE_HIST ]]; then
