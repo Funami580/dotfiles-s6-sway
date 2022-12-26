@@ -11,6 +11,7 @@
 ~/.local/share/s6/
 ~/.local/share/applications/*.desktop
 ~/.local/share/applications/*.sh
+~/.local/share/scripts/
 ~/.librewolf/librewolf.overrides.cfg
 ~/.config/mimeapps.list
 /etc/elogind/logind.conf

@@ -248,6 +248,10 @@ for font in sys.stdin.read().strip().split("\n\n"):
 ' | fzf --preview 'echo {} | sed "s/ "'$'\1''":"'$'\1''" /\n/"' | sed 's/^.* '$'\1'':'$'\1'' //' | xargs -I% fontview '%'
 }
 
+ocr() {
+    ~/.config/sway/ocr.sh "$@"
+}
+
 source ~/.config/broot/launcher/bash/br
 
 if [[ ! -v DISABLE_HIST ]]; then
