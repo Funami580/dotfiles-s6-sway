@@ -161,6 +161,10 @@ run_java() {
     rm -rf "$tmp_dir"
 }
 
+cargo_unique_deps() {
+    cargo tree --charset ascii | tail -n +2 | tr -d '|`-' | sed 's/^[ \t]*//g' | sed '/^\[.*/d' | awk '{ print $1 }' | sort | uniq
+}
+
 scan() {
     local i=0
     while read -n1 -s; do
