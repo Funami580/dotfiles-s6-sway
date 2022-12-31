@@ -215,7 +215,9 @@ for_window [app_id="LibreWolf" title="About LibreWolf"] floating enable, move po
 for_window [app_id="LibreWolf" title="Picture-in-Picture"] floating enable, border none, resize set 800 450, move position center
 for_window [app_id="betterbird" title="About Betterbird"] floating enable, move position center
 for_window [app_id="org.kde.dolphin" title="Kopiervorgang.*"] floating enable, move position center
+for_window [app_id="org.kde.dolphin" title="Datei existiert bereits.*"] move down 190
 for_window [class="jetbrains-idea" title="win0"] floating enable, move position center
+no_focus [app_id="org.kde.dolphin" title="Kopiervorgang.*"]
 
 input * xkb_layout "de"
 input * xkb_numlock enable
