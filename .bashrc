@@ -128,7 +128,7 @@ alias urldecode='python3 -c "import sys, urllib.parse as u; sys.stdout.write(u.u
 alias htmlencode='python3 -c "import sys, html as h; sys.stdout.write(h.escape(sys.stdin.read()))"'
 alias htmldecode='python3 -c "import sys, html as h; sys.stdout.write(h.unescape(sys.stdin.read()))"'
 
-alias screenoff='swaymsg "output VGA-1 dpms off"'
+alias screenoff='swaymsg "output VGA-1 power off"'
 
 # Upload file to 0x0.st and copy url to clipboard
 0x0() {
