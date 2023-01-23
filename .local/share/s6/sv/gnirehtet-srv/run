@@ -1,0 +1,6 @@
+#!/bin/execlineb -P
+importas -iu ~ HOME
+envfile ${~}/.local/share/s6/config/gnirehtet.conf
+importas -sCuD "" OPTS OPTS
+fdmove -c 2 1
+exec gnirehtet autorun ${OPTS}
