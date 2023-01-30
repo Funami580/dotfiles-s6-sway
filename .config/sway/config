@@ -21,7 +21,8 @@ set $term wezterm start --always-new-process
 # set $menu dmenu_path | dmenu | xargs swaymsg exec --
 #
 set $bemenu bemenu -i -p '' --line-height=26 --ch=17 --cw=2 --hp 10 --nf=#bbbbbb --nb=#222222 --af=#bbbbbb --ab=#222222 --fb=#222222 --hf=#eeeeee --hb=#005577
-set $menu j4-dmenu-desktop --no-generic --wrapper="swaymsg exec" --dmenu "$bemenu"
+# use: https://github.com/Funami580/sway-dmenu-desktop
+set $menu j4-dmenu-desktop --no-generic --wrapper=~/.config/sway/menu_custom_wrapper.sh --dmenu "$bemenu"
 
 ### Output configuration
 #
