@@ -256,6 +256,10 @@ ocr() {
     ~/.config/sway/ocr.sh "$@"
 }
 
+gnirehtet-restart() {
+    bash -c "gnirehtet stop $1 && source ~/.local/share/s6/config/gnirehtet.conf && exec gnirehtet start $1 \$OPTS"
+}
+
 source ~/.config/broot/launcher/bash/br
 
 if [[ ! -v DISABLE_HIST ]]; then
