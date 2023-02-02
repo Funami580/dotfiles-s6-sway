@@ -52,7 +52,7 @@ export LANG=en_US.UTF-8
 export LC_MESSAGES=C
 export LC_PAPER=de_DE.UTF-8
 
-export PATH=$PATH:~/.cargo/bin/
+export PATH="$PATH:~/.local/bin/:~/.cargo/bin/"
 export BAT_PAGER="less -RiFx4 --mouse --wheel-lines=4"
 export EXA_COLORS="reset:ex=31" # only color directories and executables
 
