@@ -68,8 +68,11 @@ WEATHER_CODE_TO_EMOJI = {
     '395': '❄️'
 }
 
+def get_cache_file(id: str) -> str:
+    return f"/tmp/{os.getuid()}-waybar-{id}"
+
 def get_website_with_cache(id: str, url: str, reload_secs: int, reload_new_day: bool) -> str:
-    CACHE_FILE = f"/tmp/{os.getuid()}-waybar-{id}"
+    CACHE_FILE = get_cache_file(id)
 
     try:
         curr_time = time.time()
@@ -107,10 +110,16 @@ def get_website_with_cache(id: str, url: str, reload_secs: int, reload_new_day: 
     return None
 
 def get_weather() -> dict | None:
-    contents = get_website_with_cache(id="weather-cache", url=f"https://wttr.in/{LOCATION}?format=j1", reload_secs=3 * 60, reload_new_day=False)
+    id = "weather-cache"
+    CACHE_FILE = get_cache_file(id)
+    contents = get_website_with_cache(id, url=f"https://wttr.in/{LOCATION}?format=j1", reload_secs=3 * 60, reload_new_day=False)
     if contents is None:
         return None
-    return json.loads(contents)
+    try:
+        return json.loads(contents)
+    except json.decoder.JSONDecodeError:
+        os.remove(CACHE_FILE)
+        return None
 
 def get_zenith() -> str | None:
     contents = get_website_with_cache(id="zenith-cache", url=f"https://wttr.in/{LOCATION}?format=%z", reload_secs=60 * 60, reload_new_day=True)
