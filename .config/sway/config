@@ -265,6 +265,18 @@ mode "ocr" {
 }
 bindsym $mod+Mod1+o mode "ocr"
 
+mode "power" {
+    bindsym p exec loginctl poweroff
+    bindsym r exec loginctl reboot
+    bindsym s exec swaymsg "mode default" && loginctl suspend
+    bindsym l exec loginctl terminate-user $(id -ur)
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Mod1+p mode "power"
+
 bindsym $mod+n split none
 bindsym $mod+t sticky toggle
 bindsym $mod+z border toggle
