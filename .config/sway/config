@@ -256,8 +256,8 @@ bindsym Control+Print exec grim -g "$(slurp)" - | swappy -f -
 bindsym Control+Shift+Print exec grim - | swappy -f -
 
 mode "ocr" {
-    bindsym e exec swaymsg "mode default" && ~/.config/sway/ocr.sh en && timeout 0.5s bemenu -p 'copied'"$(printf ' %.0s' {1..500})" --line-height=26 --tf=#bbbbbb < <(echo)
-    bindsym g exec swaymsg "mode default" && ~/.config/sway/ocr.sh german && timeout 0.5s bemenu -p 'copied'"$(printf ' %.0s' {1..500})" --line-height=26 --tf=#bbbbbb < <(echo)
+    bindsym e exec swaymsg "mode default" && ~/.config/sway/ocr.sh en && timeout 0.5s bemenu -p 'Copied'"$(printf ' %.0s' {1..500})" --line-height=26 --tf=#bbbbbb < <(echo)
+    bindsym g exec swaymsg "mode default" && ~/.config/sway/ocr.sh german && timeout 0.5s bemenu -p 'Copied'"$(printf ' %.0s' {1..500})" --line-height=26 --tf=#bbbbbb < <(echo)
 
     # Return to default mode
     bindsym Return mode "default"
