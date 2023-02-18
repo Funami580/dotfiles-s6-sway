@@ -219,6 +219,7 @@ for_window [app_id="org.kde.dolphin" title="Kopiervorgang.*"] floating enable, m
 for_window [app_id="org.kde.dolphin" title="Datei existiert bereits.*"] move down 190
 for_window [class="jetbrains-idea" title="win0"] floating enable, move position center
 for_window [class="jetbrains-studio" title="win0"] floating enable, move position center
+for_window [class="jetbrains-studio" title="splash"] floating enable, move position center
 no_focus [app_id="org.kde.dolphin" title="Kopiervorgang.*"]
 
 input * xkb_layout "de"
