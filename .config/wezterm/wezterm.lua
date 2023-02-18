@@ -55,6 +55,15 @@ return {
     {key="End", mods="CTRL", action=wezterm.action{SendKey={key="End", mods=""}}},
     {key="PageUp", mods="CTRL", action=wezterm.action{SendKey={key="PageUp", mods=""}}},
     {key="PageDown", mods="CTRL", action=wezterm.action{SendKey={key="PageDown", mods=""}}},
+    {key="Enter", mods="CTRL|SUPER|ALT", action=wezterm.action_callback(function(window, pane)
+      local success, stdout, stderr = wezterm.run_child_process({"wezterm", "cli", "list"}) -- cwd does not get updated otherwise for some reason
+      if success then
+        local cwd = pane:get_current_working_dir()
+        if cwd ~= nil then
+          wezterm.background_child_process({"wezterm", "start", "--always-new-process", "--cwd", (string.gsub(cwd, "^file://(.*)", "%1"))})
+        end
+      end
+    end)},
     {key="F12", mods="", action=wezterm.action_callback(function(window, pane)
       local info = pane:get_foreground_process_info()
       local success, stdout, stderr = wezterm.run_child_process({"sh", "-c", "echo $PPID"})
