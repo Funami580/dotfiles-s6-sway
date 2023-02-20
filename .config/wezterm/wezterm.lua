@@ -93,6 +93,16 @@ return {
     top = 0,
     bottom = 0,
   },
+  hyperlink_rules = {
+    {
+      regex = '[[:punct:]](\\w+://\\S+)[[:punct:]]',
+      format = '$1',
+    },
+    {
+      regex = '\\b\\w+://\\S+[)/a-zA-Z0-9-]+',
+      format = '$0',
+    },
+  },
   selection_word_boundary = " \t\n{}[]()\"'`.,;:!?",
   quick_select_alphabet = "asdfqweryxcvjkluiopmghtzbn",
   quote_dropped_files = "Posix",
