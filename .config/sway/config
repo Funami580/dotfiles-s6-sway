@@ -281,6 +281,14 @@ mode "power" {
 }
 bindsym $mod+Mod1+p mode "power"
 
+mode "wofi" {
+    bindsym e exec swaymsg "mode default" && rofimoji -f emojis transport_and_map_symbols geometric_shapes geometric_shapes_extended math miscellaneous_symbols miscellaneous_symbols_and_arrows miscellaneous_symbols_and_pictographs chess_symbols miscellaneous_technical -r '' --selector wofi --clipboarder wl-copy --typer wtype --selector-args '-M multi-contains'
+
+    # Return to default mode
+    bindsym Escape mode "default"
+}
+bindsym $mod+Mod1+r mode "wofi"
+
 bindsym $mod+n split none
 bindsym $mod+t sticky toggle
 bindsym $mod+z border toggle
