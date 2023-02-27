@@ -23,6 +23,7 @@ set $term wezterm start --always-new-process
 set $bemenu bemenu -i -p '' --line-height=26 --ch=17 --cw=2 --hp 10 --nf=#bbbbbb --nb=#222222 --af=#bbbbbb --ab=#222222 --fb=#222222 --hf=#eeeeee --hb=#005577
 # use: https://github.com/Funami580/sway-dmenu-desktop
 set $menu j4-dmenu-desktop --no-generic --wrapper=~/.config/sway/menu_custom_wrapper.sh --dmenu "$bemenu"
+set $copied_info timeout 0.5s bemenu -p 'Copied'"$(printf ' %.0s' {1..500})" --line-height=26 --tf=#bbbbbb < <(echo)
 
 ### Output configuration
 #
@@ -255,10 +256,12 @@ bindsym Print exec grim -g "$(slurp)" - | tee ~/Bilder/Screenshots/$(date +'%Y-%
 bindsym Shift+Print exec grim - | tee ~/Bilder/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S.png') | wl-copy --type image/png
 bindsym Control+Print exec grim -g "$(slurp)" - | swappy -f -
 bindsym Control+Shift+Print exec grim - | swappy -f -
+bindsym Mod1+Print exec adb -s "$(~/.local/share/scripts/adb_choose.sh)" exec-out screencap -p | wl-copy --type image/png && $copied_info
+bindsym Control+Mod1+Print exec adb -s "$(~/.local/share/scripts/adb_choose.sh)" exec-out screencap -p | swappy -f -
 
 mode "ocr" {
-    bindsym e exec swaymsg "mode default" && ~/.config/sway/ocr.sh en && timeout 0.5s bemenu -p 'Copied'"$(printf ' %.0s' {1..500})" --line-height=26 --tf=#bbbbbb < <(echo)
-    bindsym g exec swaymsg "mode default" && ~/.config/sway/ocr.sh german && timeout 0.5s bemenu -p 'Copied'"$(printf ' %.0s' {1..500})" --line-height=26 --tf=#bbbbbb < <(echo)
+    bindsym e exec swaymsg "mode default" && ~/.config/sway/ocr.sh en && $copied_info
+    bindsym g exec swaymsg "mode default" && ~/.config/sway/ocr.sh german && $copied_info
 
     # Return to default mode
     bindsym Return mode "default"
