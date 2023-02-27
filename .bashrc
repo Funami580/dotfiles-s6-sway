@@ -257,7 +257,12 @@ ocr() {
 }
 
 gnirehtet-restart() {
-    bash -c "gnirehtet stop $1 && source ~/.local/share/s6/config/gnirehtet.conf && exec gnirehtet start $1 \$OPTS"
+    serial=$(~/.local/share/scripts/adb_choose.sh)
+    if [[ "$?" -ne 0 ]]; then
+        echo "No ADB device found."
+        return 1
+    fi
+    bash -c "gnirehtet stop ${serial} && source ~/.local/share/s6/config/gnirehtet.conf && exec gnirehtet start ${serial} \$OPTS"
 }
 
 source ~/.config/broot/launcher/bash/br
