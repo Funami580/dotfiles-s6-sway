@@ -302,7 +302,7 @@ bindsym Control+Menu exec swaymsg "seat - cursor press button3"
 bindsym $mod+Mod1+f exec librewolf
 bindsym $mod+Mod1+Control+f exec librewolf --private-window https://duckduckgo.com/
 bindsym $mod+Mod1+c exec chromium --ozone-platform=wayland
-bindsym $mod+Mod1+Control+c exec chromium --incognito --ozone-platform=wayland
+bindsym $mod+Mod1+Control+c exec chromium --new-window --incognito --ozone-platform=wayland https://duckduckgo.com/
 bindsym $mod+Mod1+h exec cliphist list | $bemenu | cliphist decode | wl-copy
 bindsym $mod+Mod1+t exec betterbird
 bindsym $mod+Mod1+d exec dolphin
