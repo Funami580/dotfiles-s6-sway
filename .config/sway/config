@@ -273,6 +273,7 @@ mode "power" {
     bindsym p exec loginctl poweroff
     bindsym r exec loginctl reboot
     bindsym s exec swaymsg "mode default" && loginctl suspend
+    bindsym h exec swaymsg "mode default" && loginctl hibernate
     bindsym l exec loginctl terminate-user $(id -ur)
 
     # Return to default mode
