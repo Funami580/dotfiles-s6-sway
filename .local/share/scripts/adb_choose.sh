@@ -21,7 +21,7 @@ for (( i=0; i<${#MODELS[@]}; ++i)); do
   NAMES+=( "${curr_name}" )
 done
 
-index=$(wofi -i -p '' -d -c <(echo dmenu-print_line_num=true) < <(printf "%s\n" "${NAMES[@]}"))
+index=$(wofi -i -p '' -M multi-contains -d -c <(echo dmenu-print_line_num=true) < <(printf "%s\n" "${NAMES[@]}"))
 
 if [[ "$?" -ne 0 ]]; then
   exit 1
