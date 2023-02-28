@@ -1,0 +1,30 @@
+#!/bin/bash
+declare -a MOVED
+declare -a MOVED_REMOTE
+while read -r workspace_name; do
+  if grep -q '^r' <<< "$workspace_name"; then
+    if test "$workspace_name" = "r9"; then
+      mapfile -t MOVED_REMOTE < <(swaymsg -t get_tree | jq -r '.. | select(.type? == "output" and .name == "HEADLESS-1") | .. | select(.sticky? == true and .type? == "floating_con").id')
+      for id in ${MOVED_REMOTE[@]}; do
+        swaymsg "[con_id=$id] move scratchpad"
+      done
+    else
+      for id in ${MOVED_REMOTE[@]}; do
+        swaymsg "[con_id=$id] scratchpad show"
+      done
+      MOVED_REMOTE=()
+    fi
+  else
+    if test "$workspace_name" = "9"; then
+      mapfile -t MOVED < <(swaymsg -t get_tree | jq -r '.. | select(.type? == "output" and .name != "__i3" and .name != "HEADLESS-1") | .. | select(.sticky? == true and .type? == "floating_con").id')
+      for id in ${MOVED[@]}; do
+        swaymsg "[con_id=$id] move scratchpad"
+      done
+    else
+      for id in ${MOVED[@]}; do
+        swaymsg "[con_id=$id] scratchpad show"
+      done
+      MOVED=()
+    fi
+  fi
+done < <(swaymsg -t subscribe -m "['workspace']" | jq -r --unbuffered 'select(.change=="focus") | .current.name')
