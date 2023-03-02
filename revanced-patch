@@ -1,0 +1,113 @@
+#!/usr/bin/env bash
+# Requires: git, curl, wget, jq, adb, OpenJDK 17, Android SDK
+set -eu
+REALPATH=$(realpath "$0")
+CURRENT_DIRECTORY=$(dirname "${REALPATH}")
+ASSETS_DIRECTORY="${CURRENT_DIRECTORY}/assets"
+
+CLI_NAME='cli.jar'
+PATCHES_NAME='patches.jar'
+INTEGRATIONS_NAME='integrations.jar'
+KEYSTORE_NAME='output.keystore'
+
+# Check arguments
+APK_NAME=""
+INSTALL_DEVICE=""
+if test "$#" -eq 1; then
+    if test "$1" = "-h" || test "$1" = "--help"; then
+        echo "./$0 [--install] <APK_FILE>"
+        exit 0
+    else
+        APK_NAME=$(realpath "$1")
+    fi
+elif test "$#" -eq 2; then
+    if test "$1" = "-i" || test "$1" = "--install"; then
+        set +e
+        INSTALL_DEVICE=$(~/.local/share/scripts/adb_choose.sh)
+        if test "$?" -ne 0; then
+            echo "No ADB device found."
+            exit 1
+        fi
+        set -e
+    else
+        echo "Invalid argument: \"$1\""
+        exit 1
+    fi
+    APK_NAME=$(realpath "$2")
+else
+    echo "Invalid amount of arguments"
+    exit 1
+fi
+
+if ! test -f "${APK_NAME}"; then
+    echo "APK not found: \"${APK_NAME}\""
+    exit 1
+fi
+
+OUTPUT_BASENAME=$(basename "${APK_NAME}")
+OUTPUT_NAME=$(sed 's/\.apk$//i' <<< "${OUTPUT_BASENAME}")
+OUTPUT_NAME="${OUTPUT_NAME}_patched.apk"
+OUTPUT_PATH=$(realpath "${OUTPUT_NAME}")
+
+cd "${CURRENT_DIRECTORY}"
+if ! test -f "${KEYSTORE_NAME}"; then
+    echo "Keystore \"${KEYSTORE_NAME}\" does not exist"
+    exit 1
+fi
+KEYSTORE_PATH=$(realpath "${KEYSTORE_NAME}")
+
+if ! test -d "${ASSETS_DIRECTORY}"; then
+    mkdir "${ASSETS_DIRECTORY}"
+fi
+
+# Integrations
+cd "${ASSETS_DIRECTORY}"
+if ! test -d 'revanced-integrations'; then
+    git clone 'https://github.com/revanced/revanced-integrations.git'
+fi
+cd 'revanced-integrations'
+echo "sdk.dir=${HOME}/Android/Sdk" > local.properties # TODO: might need to be changed
+git stash
+git checkout main
+git stash
+git pull origin main
+INTEGRATIONS_LAST_VER=$(git describe --tags --abbrev=0 --match v*)
+INTEGRATIONS_LAST_VER_NO_V=$(tail -c +2 <<< "${INTEGRATIONS_LAST_VER}")
+git checkout "${INTEGRATIONS_LAST_VER}"
+sed -i 's/isMinifyEnabled = true/isMinifyEnabled = false/g' app/build.gradle.kts
+chmod +x gradlew
+./gradlew assembleRelease
+cp "app/build/outputs/apk/release/revanced-integrations-${INTEGRATIONS_LAST_VER_NO_V}.apk" "${ASSETS_DIRECTORY}/${INTEGRATIONS_NAME}"
+
+# Download GitHub asset function
+# first arg: target name
+# second arg: github release api url
+function download_asset() {
+    cd "${ASSETS_DIRECTORY}"
+    local LAST_RELEASE=$(curl -s "$2" | jq -r '.assets[] | .browser_download_url | select(endswith(".jar"))' | head -n1)
+    wget -N "${LAST_RELEASE}"
+    local DOWNLOADED_NAME=$(basename "${LAST_RELEASE}")
+    if test -L "$1"; then
+        local OLD_FILE=$(readlink -f "$1")
+        local OLD_FILE_BASENAME=$(basename "${OLD_FILE}")
+        if test "${DOWNLOADED_NAME}" != "${OLD_FILE_BASENAME}"; then
+            rm "${OLD_FILE}"
+        fi
+        rm "$1"
+    fi
+    ln -s "${DOWNLOADED_NAME}" "$1"
+}
+
+# Patches
+download_asset "${PATCHES_NAME}" 'https://api.github.com/repos/revanced/revanced-patches/releases/latest'
+
+# CLI
+download_asset "${CLI_NAME}" 'https://api.github.com/repos/revanced/revanced-cli/releases/latest'
+
+# Patch
+cd "${ASSETS_DIRECTORY}"
+java -jar "${CLI_NAME}" -c -b "${PATCHES_NAME}" -m "${INTEGRATIONS_NAME}" --keystore="${KEYSTORE_PATH}" -a "${APK_NAME}" --exclusive -i YOUR_PATCH -o "${OUTPUT_PATH}" # TODO: change patch
+if test "${INSTALL_DEVICE}" != ""; then
+    CURRENT_USER=$(adb -s "${INSTALL_DEVICE}" shell dumpsys activity | grep 'mUserLru' | grep -Eo '[0-9]+\]$' | tr -d ']')
+    adb -s "${INSTALL_DEVICE}" install -r --user "${CURRENT_USER}" "${OUTPUT_PATH}"
+fi
