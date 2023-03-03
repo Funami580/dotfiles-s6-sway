@@ -1,0 +1,45 @@
+Guide for Artix Linux
+
+$ sudo pacman -S virtualbox virtualbox-host-modules-artix
+$ sudo modprobe vboxdrv
+$ sudo gpasswd -a $(whoami) vboxusers
+check with `groups` if vboxusers there, otherwise logout and login
+
+download windows 10 iso from microsoft
+
+use custom install in virtualbox:
+1. disable network
+2. allow installation:
+
+Shift+F10
+
+REG ADD HKLM\SYSTEM\Setup\LabConfig /v BypassTPMCheck /t REG_DWORD /d 1
+REG ADD HKLM\SYSTEM\Setup\LabConfig /v BypassSecureBootCheck /t REG_DWORD /d 1
+
+3. click on custom install instead of upgrade
+4. wait until done
+5. reactivate ethernet
+6. you have to check usb hosts you want to allow
+
+Unlock Xiaomi:
+  https://www.youtube.com/watch?v=ZMV5tNXRiFM
+  https://drive.google.com/file/d/1OzRYNfqFBCy8u_-GpRGUy8sClWAGYcH8/view (ADB + USB drivers) -> Run as Administrator
+
+  Fastboot drivers:
+  https://beebom.com/fastboot-not-detecting-device-windows-10/
+  https://drive.google.com/drive/folders/1D96njoYn-n3alu3ggaK3Kw8hMGLKhJVg?usp=sharing
+
+  Download MiUnlock -> Run as Administrator
+
+In case a USB port is not detected, it is possible to check usb ports with:
+$ sudo lsusb
+$ sudo VBoxManage list usbhost
+
+Firmware (use Global): https://xiaomifirmwareupdater.com/archive/firmware/joyeuse/
+
+---- Best camera after flashing:
+Best:
+https://forum.xda-developers.com/t/best-gcam7-3-port-for-redmi-note-9-pro-s-curtana-joyeuse.4103275/page-21#post-86795535
+https://www.celsoazevedo.com/files/android/google-camera/f/changelog1497/
+
+This one seems also good: https://www.celsoazevedo.com/files/android/google-camera/dev-bsg/f/dl123/
