@@ -1,0 +1,4 @@
+#!/bin/execlineb -P
+forx -E name { GLAN EHC1 EHC2 XHC }
+if { grep -q "^${name}\t.*\t\*enabled" /proc/acpi/wakeup }
+redirfd -w 1 /proc/acpi/wakeup echo ${name}
