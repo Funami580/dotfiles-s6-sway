@@ -112,6 +112,7 @@ return {
   animation_fps = 1,
   cursor_blink_ease_in = "Constant",
   cursor_blink_ease_out = "Constant",
+  hide_mouse_cursor_when_typing = false,
   detect_password_input = false,
   check_for_updates = false,
   enable_wayland = true,
