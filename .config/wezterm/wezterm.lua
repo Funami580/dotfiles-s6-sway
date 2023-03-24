@@ -74,6 +74,7 @@ return {
     {key="Backspace", mods="CTRL", action={SendKey={key="w", mods="CTRL"}}},
     {key="Delete", mods="CTRL", action={SendKey={key="d", mods="ALT"}}},
     {key="u", mods="CTRL|SHIFT", action=wezterm.action{CharSelect={copy_on_select=true, copy_to="Clipboard"}}},
+    {key="p", mods="CTRL|SHIFT", action="ActivateCommandPalette"},
   },
   mouse_bindings = {
     {
@@ -93,16 +94,6 @@ return {
     top = 0,
     bottom = 0,
   },
-  hyperlink_rules = {
-    {
-      regex = '[[:punct:]](\\w+://\\S+)[[:punct:]]',
-      format = '$1',
-    },
-    {
-      regex = '\\b\\w+://\\S+[)/a-zA-Z0-9-]+',
-      format = '$0',
-    },
-  },
   selection_word_boundary = " \t\n{}[]()\"'`.,;:!?",
   quick_select_alphabet = "asdfqweryxcvjkluiopmghtzbn",
   quote_dropped_files = "Posix",
@@ -117,6 +108,7 @@ return {
   min_scroll_bar_height = "2cell",
   alternate_buffer_wheel_scroll_speed = 5,
   mux_output_parser_coalesce_delay_ms = 0,
+  adjust_window_size_when_changing_font_size = false,
   animation_fps = 1,
   cursor_blink_ease_in = "Constant",
   cursor_blink_ease_out = "Constant",
