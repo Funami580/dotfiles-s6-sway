@@ -56,6 +56,8 @@ export PATH="$PATH:~/.local/bin/:~/.cargo/bin/"
 export BAT_PAGER="less -RiFx4 --mouse --wheel-lines=4"
 export EXA_COLORS="reset:ex=31" # only color directories and executables
 
+alias cdi='cd "$(fd -t d | fzf)"'
+alias cdia='cd "$(fd -H -t d | fzf)"'
 alias lsx='exa -lbh --group-directories-first'
 alias loc='tokei' # lines of code
 alias catr='cat -v' # cat-raw
