@@ -79,8 +79,8 @@ def get_website_with_cache(id: str, url: str, reload_secs: int, reload_new_day: 
         last_mtime = os.path.getmtime(CACHE_FILE)
         new_day_time = datetime.now().replace(hour=0, minute=1, second=0, microsecond=0).timestamp()
 
-        if (curr_time >= new_day_time and last_mtime < new_day_time) or curr_time - last_mtime < reload_secs:
-            # return cache, if accessed within reload_secs seconds after last update
+        if not (curr_time >= new_day_time and last_mtime < new_day_time) and curr_time - last_mtime < reload_secs:
+            # return cache, if not info from last day and accessed within reload_secs seconds after last update
             with open(CACHE_FILE, "r") as f:
                 return f.read()
     except Exception:
