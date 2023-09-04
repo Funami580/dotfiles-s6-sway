@@ -18,7 +18,7 @@ function start_sway() {
   export _JAVA_AWT_WM_NONREPARENTING=1
 
   # https://github.com/swaywm/sway/wiki#issues-with-jetbrains-ide-popupsmenus-losing-focus
-  export STUDIO_JDK=/usr/lib/jvm/java-11-openjdk/
+  export STUDIO_JDK=/usr/lib/jvm/java-17-openjdk/
 
   # cliphist: remove old history
   rm -f ~/.cache/cliphist/db
