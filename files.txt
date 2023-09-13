@@ -18,6 +18,8 @@
 /etc/elogind/logind.conf
 /etc/cron.monthly/
 /etc/s6/config/connman.conf
+/etc/s6/adminsv/disable-wakeup
+/etc/s6/adminsv/default/contents.d/disable-wakeup
 /etc/connman/main.conf
 /etc/modprobe.d/nobeep.conf
 /usr/lib/dolphin-wezterm/dolphin-open-wezterm.sh
