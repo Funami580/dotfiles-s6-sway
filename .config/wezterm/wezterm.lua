@@ -60,7 +60,7 @@ return {
       if success then
         local cwd = pane:get_current_working_dir()
         if cwd ~= nil then
-          wezterm.background_child_process({"wezterm", "start", "--always-new-process", "--cwd", (string.gsub(cwd, "^file://(.*)", "%1"))})
+          wezterm.background_child_process({"wezterm", "start", "--always-new-process", "--cwd", cwd.file_path})
         end
       end
     end)},
