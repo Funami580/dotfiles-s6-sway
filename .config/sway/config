@@ -260,8 +260,9 @@ bindsym Mod1+Print exec adb -s "$(~/.local/share/scripts/adb_choose.sh)" exec-ou
 bindsym Control+Mod1+Print exec adb -s "$(~/.local/share/scripts/adb_choose.sh)" exec-out screencap -p | swappy -f -
 
 mode "ocr" {
-    bindsym e exec swaymsg "mode default" && ~/.config/sway/ocr.sh en && $copied_info
-    bindsym g exec swaymsg "mode default" && ~/.config/sway/ocr.sh german && $copied_info
+    bindsym e exec swaymsg "mode default" && ~/.config/sway/ocr.sh eng && $copied_info
+    bindsym g exec swaymsg "mode default" && ~/.config/sway/ocr.sh deu && $copied_info
+    bindsym j exec swaymsg "mode default" && ~/.config/sway/ocr.sh jpn && $copied_info
 
     # Return to default mode
     bindsym Return mode "default"
