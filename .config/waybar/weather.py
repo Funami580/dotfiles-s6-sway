@@ -89,12 +89,12 @@ def get_website_with_cache(id: str, url: str, reload_secs: int, reload_new_day: 
 
     # otherwise try to get new information
     try:
-        response = requests.get(url).text
+        response = requests.get(url, timeout=5).text
         with open(CACHE_FILE, "w") as f:
             f.write(response)
         return response
     except Exception:
-        # we seem to have no internet connection, ignore
+        # we seem to have no internet connection or a timeout occurred, ignore
         pass
 
     # it might be that the file exists, but is pretty old.
