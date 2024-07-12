@@ -250,7 +250,8 @@ bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym $mod+m exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym $mod+Shift+m exec ~/.config/sway/mute_window.sh
+bindsym $mod+Shift+m exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym $mod+Control+m exec ~/.config/sway/mute_window.sh
 
 bindsym Print exec grim -g "$(slurp)" - | tee ~/Bilder/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S.png') | wl-copy --type image/png
 bindsym Shift+Print exec grim - | tee ~/Bilder/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S.png') | wl-copy --type image/png
