@@ -64,7 +64,7 @@
 		"tooltip": false
 	},
 	"custom/network": {
-		"exec": "if connmanctl state | grep -qE 'State = (online|ready)'; then if ((mullvad status | grep -q Connected) || (/opt/windscribe/windscribe-cli status | grep -q Connected)); then echo ' eth0'; elif ((mullvad status | grep -q Connecting || mullvad status | grep -q Disconnecting) || (/opt/windscribe/windscribe-cli status | grep -q Connecting || /opt/windscribe/windscribe-cli status | grep -q Disconnecting)); then echo '* eth0'; elif mullvad status | grep -q Blocked; then echo ' eth0'; else echo ' eth0'; fi; else echo 'eth0'; fi",
+		"exec": "if connmanctl state | grep -qE 'State = (online|ready)'; then if mullvad status | grep -q Connected; then echo ' eth0'; elif mullvad status | grep -q Connecting || mullvad status | grep -q Disconnecting; then echo '* eth0'; elif mullvad status | grep -q Blocked; then echo ' eth0'; else echo ' eth0'; fi; else echo 'eth0'; fi",
 		"exec-if": "exit 0",
 		"interval": 1,
 		"on-click-right": "connmanctl state | grep -q 'OfflineMode = False'; [[ $? = 0 ]] && connmanctl enable offline || connmanctl disable offline",
