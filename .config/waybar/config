@@ -105,7 +105,7 @@
 	"sway/workspaces": {
 		"disable-scroll": true,
 		"format": "{name}",
-		"persistent_workspaces": {
+		"persistent-workspaces": {
 			"9": ["VGA-1"],
 			"r9": ["HEADLESS-1"]
 		}
