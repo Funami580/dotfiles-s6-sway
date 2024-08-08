@@ -69,7 +69,8 @@
 		"interval": 1,
 		"on-click-right": "connmanctl state | grep -q 'OfflineMode = False'; [[ $? = 0 ]] && connmanctl enable offline || connmanctl disable offline",
 		"on-click-middle": "mullvad status | grep -q Disconnected; if [[ $? = 0 ]]; then mullvad connect; else mullvad disconnect; fi",
-		"tooltip": false
+		"tooltip": false,
+		"cursor": false,
 	},
 	"custom/memory": {
 		"interval": 5,
@@ -77,7 +78,8 @@
 		"return-type": "json",
 		"exec": "~/.config/waybar/mem.sh",
 		"exec-if": "exit 0",
-		"tooltip": true
+		"tooltip": true,
+		"cursor": false,
 	},
 	"custom/night-color": {
 		"exec": "~/.config/waybar/gamma.sh current",
@@ -89,13 +91,15 @@
 		"on-scroll-up": "~/.config/waybar/gamma.sh up",
 		"on-scroll-down": "~/.config/waybar/gamma.sh down",
 		"signal": 8,
-		"tooltip": false
+		"tooltip": false,
+		"cursor": false,
 	},
 	"custom/shutdown": {
 		"format": "",
 		"interval": "once",
 		"on-click": "pkill -fU ${UID} \"^swaynag .*Power Menu Options\" || swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'loginctl terminate-user $(id -ur)' -b 'Hibernate' 'pkill -fU ${UID} \"^swaynag .*Power Menu Options\"; loginctl hibernate' -b 'Suspend' 'pkill -fU ${UID} \"^swaynag .*Power Menu Options\"; loginctl suspend' -b 'Reboot' 'loginctl reboot' -b 'Shutdown' 'loginctl poweroff' -s ' X ' --font monospace --background 292b2e --button-background 1a1a1a --border 1a1a1a --border-bottom 1a1a1a --text fdf6e3 --button-text fdf6e3 --button-dismiss-gap 0 --button-gap 20 --button-border-size 0 --border-bottom-size 2 --message-padding 5 --button-padding 3",
-		"tooltip": false
+		"tooltip": false,
+		"cursor": false,
 	},
 
 	"sway/workspaces": {
@@ -117,7 +121,8 @@
 			"on-scroll-up": "tz_down",
 			"on-scroll-down": "tz_up"
 		},
-		"interval": 1
+		"interval": 1,
+		"cursor": false,
 	},
 	"custom/clock-weather": {
 		"exec": "~/.config/waybar/weather.py",
@@ -125,7 +130,8 @@
 		"return-type": "json",
 		"tooltip": true,
 		"interval": 1,
-		"on-click-middle": "xdg-open 'https://www.wetteronline.de/wetter/LOCATION'"
+		"on-click-middle": "xdg-open 'https://www.wetteronline.de/wetter/LOCATION'",
+		"cursor": false,
 	},
 	"clock#3": {
 		"format": "{:%Y-%m-%d}",
@@ -149,7 +155,8 @@
 			"on-scroll-up": "shift_up",
 			"on-scroll-down": "shift_down"
 		},
-		"interval": 1
+		"interval": 1,
+		"cursor": false,
 	},
 	"pulseaudio#1": {
 		"format": "{icon} {volume:2}%",
@@ -166,7 +173,8 @@
 		"on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
 		"on-click-middle": "playerctl play-pause",
 		"scroll-step": 2,
-		"tooltip": false
+		"tooltip": false,
+		"cursor": false,
 	},
 	"pulseaudio#2": {
 		"format": "{format_source}",
@@ -176,7 +184,8 @@
 		"on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -5%",
 		"on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
 		"scroll-step": 5,
-		"tooltip": false
+		"tooltip": false,
+		"cursor": false,
 	},
 	"memory": {
 		"interval": 5,
