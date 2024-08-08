@@ -254,9 +254,9 @@ bindsym $mod+Shift+m exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym $mod+Control+m exec ~/.config/sway/mute_window.sh
 
 bindsym Print exec grim -g "$(slurp)" - | tee ~/Bilder/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S.png') | wl-copy --type image/png
-bindsym Shift+Print exec grim - | tee ~/Bilder/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S.png') | wl-copy --type image/png
+bindsym Shift+Print exec grim -g "0,0 1680x1050" - | tee ~/Bilder/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S.png') | wl-copy --type image/png
 bindsym Control+Print exec grim -g "$(slurp)" - | swappy -f -
-bindsym Control+Shift+Print exec grim - | swappy -f -
+bindsym Control+Shift+Print exec grim -g "0,0 1680x1050" - | swappy -f -
 bindsym Mod1+Print exec adb -s "$(~/.local/share/scripts/adb_choose.sh)" exec-out screencap -p | wl-copy --type image/png && $copied_info
 bindsym Control+Mod1+Print exec adb -s "$(~/.local/share/scripts/adb_choose.sh)" exec-out screencap -p | swappy -f -
 
