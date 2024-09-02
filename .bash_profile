@@ -20,6 +20,13 @@ function start_sway() {
   # https://github.com/swaywm/sway/wiki#issues-with-jetbrains-ide-popupsmenus-losing-focus
   export STUDIO_JDK=/usr/lib/jvm/java-17-openjdk/
 
+  # Dolphin: fix "Open with" dialog being empty (requires archlinux-xdg-menu package)
+  export XDG_MENU_PREFIX=arch-
+
+  # Set Qt style to breeze (requires qt6ct and breeze package)
+  # Also adds single click option for Dolphin
+  export QT_QPA_PLATFORMTHEME=qt6ct
+
   # cliphist: remove old history
   rm -f ~/.cache/cliphist/db
 
