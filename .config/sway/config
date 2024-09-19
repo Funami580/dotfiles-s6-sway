@@ -307,7 +307,7 @@ bindsym $mod+Mod1+c exec chromium --ozone-platform=wayland
 bindsym $mod+Mod1+Control+c exec chromium --new-window --incognito --ozone-platform=wayland https://duckduckgo.com/
 bindsym $mod+Mod1+h exec cliphist list | $bemenu | cliphist decode | wl-copy
 bindsym $mod+Mod1+t exec betterbird
-bindsym $mod+Mod1+d exec dolphin
+bindsym $mod+Mod1+d exec env LC_MESSAGES=C dolphin
 bindsym $mod+Mod1+k exec kate
 bindsym $mod+Mod1+v exec mpv "$(wl-paste -n)"
 bindsym $mod+Mod1+Return exec $term -- python3
