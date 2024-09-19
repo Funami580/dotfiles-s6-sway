@@ -194,6 +194,11 @@ scan() {
     fi
 }
 
+md2pdf() {
+    base_name=$(rev <<< "$1" | cut -d'.' -f2- | rev)
+    pandoc -f markdown+hard_line_breaks -o "${base_name}.pdf" <(sed '/^\/\//d' "$1")
+}
+
 s6db() {
     local DATAPATH="/home/${USER}/.local/share/s6"
     local RCPATH="${DATAPATH}/rc"
