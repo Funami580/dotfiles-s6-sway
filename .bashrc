@@ -195,7 +195,7 @@ scan() {
 }
 
 md2pdf() {
-    base_name=$(rev <<< "$1" | cut -d'.' -f2- | rev)
+    local base_name=$(rev <<< "$1" | cut -d'.' -f2- | rev)
     pandoc -f markdown+hard_line_breaks -o "${base_name}.pdf" <(sed '/^\/\//d' "$1")
 }
 
@@ -264,6 +264,7 @@ ocr() {
 }
 
 gnirehtet-restart() {
+    local serial
     serial=$(~/.local/share/scripts/adb_choose.sh)
     if [[ "$?" -ne 0 ]]; then
         echo "No ADB device found."
