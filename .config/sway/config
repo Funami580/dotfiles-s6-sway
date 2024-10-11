@@ -234,10 +234,10 @@ exec ~/.config/sway/mute_microphone.sh
 exec sleep 0.5 && ~/.config/waybar/gamma.sh start
 
 # Disable scrolling through tabs
-bindsym button4 nop
-bindsym button5 nop
-bindsym button6 nop
-bindsym button7 nop
+bindsym --border button4 nop
+bindsym --border button5 nop
+bindsym --border button6 nop
+bindsym --border button7 nop
 
 # requires: playerctl, mpv-mpris
 bindsym XF86AudioPlay exec playerctl play-pause
