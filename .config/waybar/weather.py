@@ -428,7 +428,7 @@ def output_json():
             hour_temp = format_temperature(hour['tempC'].rjust(2))
             hour_humidity = format_humidity_with_emoji(hour['humidity'].rjust(2))
             hour_wind = format_wind_short(hour['windspeedKmph'].rjust(2), hour['winddir16Point'].ljust(3))
-            hour_weather_condition = hour['weatherDesc'][0]['value']
+            hour_weather_condition = hour['weatherDesc'][0]['value'].strip()
             hour_wind_description = wind_kmph_to_beaufort_description(int(hour['windspeedKmph']))
             hour_chances = format_chances(hour)
 
