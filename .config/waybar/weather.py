@@ -130,7 +130,7 @@ def get_zenith() -> str | None:
 def get_tides() -> dict | None:
     if DISABLE_TIDES:
         return None
-    contents = get_website_with_cache(id="tides-cache", url=f"https://www.meerestemperatur.de/europa/deutschland/{LOCATION.lower()}/tides.html", reload_secs=60 * 60 * 24, reload_new_day=False)
+    contents = get_website_with_cache(id="tides-cache", url=f"https://www.meerestemperatur.de/europa/deutschland/{re.split(r"[+,]", LOCATION)[0].lower()}/tides.html", reload_secs=60 * 60 * 24, reload_new_day=False)
     if contents is None:
         return None
     soup = BeautifulSoup(contents, "html.parser")
