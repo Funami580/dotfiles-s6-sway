@@ -304,6 +304,5 @@ if [[ ! -v DISABLE_HIST ]]; then
     fi
 else
     unset HISTFILE
-    HISTSIZE=0
     echo "History disabled."
 fi
